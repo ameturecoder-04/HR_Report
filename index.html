@@ -55,6 +55,14 @@
             background: #3f4451; 
         }
         
+        .custom-scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* --- Hierarchy Chart Specific Styles --- */
         .org-presentation {
             --node-bg: #181b21;
@@ -84,7 +92,7 @@
         .org-node.root .org-staff-name { color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.25); border: none; }
         .org-node-title { font-weight: 600; font-size: 11px; line-height: 1.2; margin-bottom: 6px; letter-spacing: 0.01em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: var(--text-main); }
         .org-staff-name { 
-            display: block; /* Changed from inline-block to block */
+            display: block; 
             font-size: 10px; 
             color: var(--text-muted); 
             font-weight: 500; 
@@ -92,15 +100,13 @@
             padding: 4px 6px; 
             border-radius: 4px; 
             border: 1px solid rgba(255,255,255,0.03); 
-            
-            /* FIXES START HERE */
             width: 100%; 
-            white-space: normal;      /* Allows text to wrap to next line */
-            overflow: visible;        /* Shows the wrapped text */
-            text-overflow: clip;      /* Removes the ellipsis dots */
-            box-sizing: border-box;   /* Ensures padding doesn't break the width */
-            word-wrap: break-word;    /* Break long names if necessary */
-            line-height: 1.4;         /* Space out the vertical lines */
+            white-space: normal;      
+            overflow: visible;        
+            text-overflow: clip;      
+            box-sizing: border-box;   
+            word-wrap: break-word;    
+            line-height: 1.4;         
         }
         .org-black-square { width: 14px; height: 14px; background: var(--theme-gradient); border-radius: 50%; z-index: 10; position: relative; box-shadow: 0 0 0 4px #0f1115, 0 0 0 5px rgba(255, 255, 255, 0.2); }
     </style>
@@ -154,7 +160,7 @@
                 Outlet Reports
             </button>
 
-            <!-- Tab 0 (Executive Summary) moved here -->
+            <!-- Tab 0 (Executive Summary) -->
             <button data-tab="tab-0" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
                 <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                 Executive Summary
@@ -228,288 +234,143 @@
 
             <!-- ===================== TAB 1: CALENDARS ===================== -->
             <div id="tab-1" class="tab-content hidden">
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-white">Company Calendars</h2>
-                    <p class="text-sm text-gray-400">April 2026 schedules: Leave, Events, and Outlet Visits.</p>
+                <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-semibold text-white">Company Calendars</h2>
+                        <p class="text-sm text-gray-400">May 2026 Master view: Leaves, Visits, and Events.</p>
+                    </div>
+                    <!-- Sub-Navigation Tabs -->
+                    <div class="flex flex-wrap gap-2 bg-dark-panel p-1.5 rounded-xl border border-dark-border w-fit">
+                        <button onclick="switchSubTab('core-leaves')" id="sub-tab-btn-core-leaves" class="sub-tab-btn px-4 py-2 text-sm font-semibold rounded-lg bg-brand-500 text-white shadow-sm transition-all">Core Leaves</button>
+                        <button onclick="switchSubTab('manager-leaves')" id="sub-tab-btn-manager-leaves" class="sub-tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-dark-border border border-transparent transition-all">Manager Leaves</button>
+                        <button onclick="switchSubTab('outlet-visits')" id="sub-tab-btn-outlet-visits" class="sub-tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-dark-border border border-transparent transition-all">Outlet Visits</button>
+                        <button onclick="switchSubTab('events')" id="sub-tab-btn-events" class="sub-tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-dark-border border border-transparent transition-all">Events</button>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                    
-                    <!-- Managers Calendar -->
-                    <div class="bg-dark-panel rounded-xl border border-dark-border flex flex-col overflow-hidden">
-                        <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex justify-between items-center">
-                            <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-brand-500"></i> Managers Leave Calendar</h3>
-                            <span class="text-xs text-gray-400 bg-dark-bg px-2 py-1 rounded border border-dark-border">April 2026</span>
-                        </div>
-                        <div class="grid grid-cols-7 border-b border-dark-border bg-dark-panel text-xs font-semibold text-gray-400 text-center">
-                            <div class="py-2 border-r border-dark-border">Sun</div>
-                            <div class="py-2 border-r border-dark-border">Mon</div>
-                            <div class="py-2 border-r border-dark-border">Tue</div>
-                            <div class="py-2 border-r border-dark-border">Wed</div>
-                            <div class="py-2 border-r border-dark-border">Thu</div>
-                            <div class="py-2 border-r border-dark-border">Fri</div>
-                            <div class="py-2">Sat</div>
-                        </div>
-                        <!-- Calendar Grid -->
-                        <div class="grid grid-cols-7 text-sm text-gray-300">
-                            <!-- Sun, Mon, Tue (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">1</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">2</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JITHESH</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">3</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JITHESH</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">4</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">5</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">6</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JACKSON</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">7</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">VISHNU</span><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JACKSON</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">8</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">SHAMEER</span><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">VISHNU</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">9</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">10</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">11</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">12</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">NITHIN</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">13</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">NITHIN</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">14</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">15</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">16</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">17</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">18</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">19</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JOHN</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">20</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">SHAMEER</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">21</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">SHAMEER</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">22</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JITHESH</span><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">NITHIN</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">23</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">24</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">25</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">26</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JOHN</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">27</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">VISHNU</span><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JACKSON</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">28</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JITHESH</span><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">JACKSON</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">29</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] rounded border border-brand-500/30 w-fit">SHAMEER</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">30</span></div>
-                            
-                            <!-- Fri, Sat (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                        </div>
-                    </div>
-
-                    <!-- Core Team Calendar -->
-                    <div class="bg-dark-panel rounded-xl border border-dark-border flex flex-col overflow-hidden">
-                        <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex justify-between items-center">
-                            <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="crown" class="w-5 h-5 text-blue-500"></i> Core Team Leave Calendar</h3>
-                            <span class="text-xs text-gray-400 bg-dark-bg px-2 py-1 rounded border border-dark-border">April 2026</span>
-                        </div>
-                        <div class="grid grid-cols-7 border-b border-dark-border bg-dark-panel text-xs font-semibold text-gray-400 text-center">
-                            <div class="py-2 border-r border-dark-border">Sun</div>
-                            <div class="py-2 border-r border-dark-border">Mon</div>
-                            <div class="py-2 border-r border-dark-border">Tue</div>
-                            <div class="py-2 border-r border-dark-border">Wed</div>
-                            <div class="py-2 border-r border-dark-border">Thu</div>
-                            <div class="py-2 border-r border-dark-border">Fri</div>
-                            <div class="py-2">Sat</div>
-                        </div>
-                        <!-- Calendar Grid -->
-                        <div class="grid grid-cols-7 text-sm text-gray-300">
-                            <!-- Sun, Mon, Tue (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">1</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">PM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">2</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">CHEF</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">3</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">CHEF</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">OM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">HR</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">4</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">5</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">GM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">FM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">HR</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">6</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">7</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">8</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">9</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">OM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">BDM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">10</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">11</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">12</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">GM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">FM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">HR</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">13</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">14</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">15</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">PM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">BDM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">16</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">PM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">17</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">18</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">19</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">GM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">FM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">HR</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">20</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">OM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">21</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">BDM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">OM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">22</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">BDM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">23</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">24</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">25</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">26</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">FM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">PM</span><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">HR</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">27</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded border border-blue-500/30 w-fit">GM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">28</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">29</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">30</span></div>
-                            
-                            <!-- Fri, Sat (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
+                <!-- 1. Core Team Leave Calendar -->
+                <div id="core-leaves" class="sub-tab-content block bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
+                    <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="crown" class="w-5 h-5 text-brand-500"></i> Core Team Leaves</h3>
+                        <div class="bg-dark-bg text-gray-300 rounded-lg px-3 py-1.5 border border-dark-border text-xs">
+                            Total Scheduled: <strong class="text-brand-400 text-sm ml-1" id="total-core-leaves">0</strong>
                         </div>
                     </div>
                     
-                    <!-- Event Calendar -->
-                    <div class="bg-dark-panel rounded-xl border border-dark-border flex flex-col overflow-hidden">
-                        <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex justify-between items-center">
-                            <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="calendar-range" class="w-5 h-5 text-emerald-500"></i> Event Calendar</h3>
-                            <span class="text-xs text-gray-400 bg-dark-bg px-2 py-1 rounded border border-dark-border">April 2026</span>
+                    <div class="p-4 border-b border-dark-border flex flex-wrap gap-4 justify-center text-xs">
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">PM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">FM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">BDM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span><span class="font-medium text-gray-400">HR</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span><span class="font-medium text-gray-400">GM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span><span class="font-medium text-gray-400">Chef</span></div>
+                    </div>
+
+                    <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
+                        <div class="grid grid-cols-7 gap-4 mb-2 text-center text-xs font-semibold uppercase tracking-wider">
+                            <div class="text-brand-500">Sun</div><div class="text-gray-500">Mon</div><div class="text-gray-500">Tue</div><div class="text-gray-500">Wed</div><div class="text-gray-500">Thu</div><div class="text-gray-500">Fri</div><div class="text-gray-500">Sat</div>
                         </div>
-                        <div class="grid grid-cols-7 border-b border-dark-border bg-dark-panel text-xs font-semibold text-gray-400 text-center">
-                            <div class="py-2 border-r border-dark-border">Sun</div>
-                            <div class="py-2 border-r border-dark-border">Mon</div>
-                            <div class="py-2 border-r border-dark-border">Tue</div>
-                            <div class="py-2 border-r border-dark-border">Wed</div>
-                            <div class="py-2 border-r border-dark-border">Thu</div>
-                            <div class="py-2 border-r border-dark-border">Fri</div>
-                            <div class="py-2">Sat</div>
+                        <div id="grid-core-leaves" class="grid grid-cols-7 gap-2"></div>
+                    </div></div>
+                </div>
+
+                <!-- 2. Managers Leave Calendar -->
+                <div id="manager-leaves" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
+                    <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Managers Leaves</h3>
+                        <div class="bg-dark-bg text-gray-300 rounded-lg px-3 py-1.5 border border-dark-border text-xs">
+                            Total Scheduled: <strong class="text-blue-400 text-sm ml-1" id="total-manager-leaves">0</strong>
                         </div>
-                        <!-- Calendar Grid -->
-                        <div class="grid grid-cols-7 text-sm text-gray-300">
-                            <!-- Sun, Mon, Tue (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">1</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">2</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">3</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">4</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Managers Meeting with GM</span></div></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">5</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">6</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">7</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Core Team Review Meeting</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">8</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">ODC</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">9</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">ODC</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">10</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">11</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Core Team Meeting</span></div></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">12</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">13</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">14</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">15</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Managers Meeting with GM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">16</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">17</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">18</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Core Team Meeting</span></div></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">19</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">20</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Induction Training</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">21</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Induction Training</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">22</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Managers Meeting with GM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">23</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">24</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">25</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Core Team Meeting</span></div></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">26</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">All Outlet Monthly Meeting</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">27</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">28</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">29</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-emerald-500/20 text-emerald-400 text-[9px] leading-tight rounded border border-emerald-500/30 w-full break-words text-left">Managers Meeting with GM</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">30</span></div>
-                            
-                            <!-- Fri, Sat (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
+                    </div>
+                    
+                    <div class="p-4 border-b border-dark-border flex flex-wrap gap-4 justify-center text-xs">
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">John</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">Shameer</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">Gerald</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span><span class="font-medium text-gray-400">Nithin</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span><span class="font-medium text-gray-400">Jackson</span></div>
+                    </div>
+
+                    <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
+                        <div class="grid grid-cols-7 gap-4 mb-2 text-center text-xs font-semibold uppercase tracking-wider">
+                            <div class="text-brand-500">Sun</div><div class="text-gray-500">Mon</div><div class="text-gray-500">Tue</div><div class="text-gray-500">Wed</div><div class="text-gray-500">Thu</div><div class="text-gray-500">Fri</div><div class="text-gray-500">Sat</div>
+                        </div>
+                        <div id="grid-manager-leaves" class="grid grid-cols-7 gap-2"></div>
+                    </div></div>
+                </div>
+
+                <!-- 3. Outlet Visits Calendar -->
+                <div id="outlet-visits" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
+                    <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="map" class="w-5 h-5 text-fuchsia-500"></i> Core Team Outlet Visits</h3>
+                        <div class="bg-dark-bg text-gray-300 rounded-lg px-3 py-1.5 border border-dark-border text-xs">
+                            Total Visits: <strong class="text-fuchsia-400 text-sm ml-1" id="total-visits">0</strong>
                         </div>
                     </div>
 
-                    <!-- Outlet Visit Calendar -->
-                    <div class="bg-dark-panel rounded-xl border border-dark-border flex flex-col overflow-hidden">
-                        <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col gap-3">
-                            <div class="flex justify-between items-center">
-                                <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="map" class="w-5 h-5 text-fuchsia-500"></i> Outlet Visit Calendar</h3>
-                                <span class="text-xs text-gray-400 bg-dark-bg px-2 py-1 rounded border border-dark-border">April 2026</span>
-                            </div>
-                            <div class="flex flex-wrap gap-4 text-xs text-fuchsia-200/80 bg-fuchsia-500/10 px-3 py-2 rounded-lg border border-fuchsia-500/20">
-                                <span class="flex items-center gap-1.5 font-medium"><i data-lucide="info" class="w-3.5 h-3.5 text-fuchsia-400"></i> All Saturday: GM outlet visit (Surprise visit)</span>
-                                <span class="flex items-center gap-1.5 font-medium"><i data-lucide="info" class="w-3.5 h-3.5 text-fuchsia-400"></i> All Sunday: OM outlet visit</span>
-                            </div>
+                    <div class="bg-brand-500/10 border-b border-brand-500/20 px-4 py-3 flex items-center justify-center gap-2 text-brand-300 text-xs">
+                        <i data-lucide="info" class="w-4 h-4 text-brand-400 shrink-0"></i>
+                        <span><strong>Note:</strong> GM visits outlets every Saturday.</span>
+                    </div>
+                    
+                    <div class="p-4 border-b border-dark-border flex flex-wrap gap-4 justify-center text-xs">
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">BDM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span><span class="font-medium text-gray-400">HR</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">FM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">PM</span></div>
+                    </div>
+
+                    <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
+                        <div class="grid grid-cols-7 gap-4 mb-2 text-center text-xs font-semibold uppercase tracking-wider">
+                            <div class="text-brand-500">Sun</div><div class="text-gray-500">Mon</div><div class="text-gray-500">Tue</div><div class="text-gray-500">Wed</div><div class="text-gray-500">Thu</div><div class="text-gray-500">Fri</div><div class="text-gray-500">Sat</div>
                         </div>
-                        <div class="grid grid-cols-7 border-b border-dark-border bg-dark-panel text-xs font-semibold text-gray-400 text-center">
-                            <div class="py-2 border-r border-dark-border">Sun</div>
-                            <div class="py-2 border-r border-dark-border">Mon</div>
-                            <div class="py-2 border-r border-dark-border">Tue</div>
-                            <div class="py-2 border-r border-dark-border">Wed</div>
-                            <div class="py-2 border-r border-dark-border">Thu</div>
-                            <div class="py-2 border-r border-dark-border">Fri</div>
-                            <div class="py-2">Sat</div>
-                        </div>
-                        <!-- Calendar Grid -->
-                        <div class="grid grid-cols-7 text-sm text-gray-300">
-                            <!-- Sun, Mon, Tue (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">1</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">2</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">3</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">4</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">5</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">6</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">7</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">8</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">9</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">10</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">BDM KKD Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">11</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">12</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">13</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">HR ALV Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">14</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">15</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">16</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">17</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">BDM EDA Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">18</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">19</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">20</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">FM ALV Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">21</span></div> 
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">22</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">FM KLY Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">23</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">HR EDA Visit</span><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">FM KKD Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">24</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">BDM KLY Visit</span><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">FM EDA Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">25</span></div>
-                            
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">26</span></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">27</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">HR KLY Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">28</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">HR KKD Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">29</span><div class="mt-1 flex flex-col gap-1"><span class="px-1.5 py-1 bg-fuchsia-500/20 text-fuchsia-400 text-[9px] leading-tight rounded border border-fuchsia-500/30 w-full break-words text-left">BDM ALV Visit</span></div></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border hover:bg-dark-border/50 transition-colors"><span class="text-xs text-gray-500 font-medium">30</span></div>
-                            
-                            <!-- Fri, Sat (Empty) -->
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
-                            <div class="min-h-[85px] p-2 border-r border-b border-dark-border bg-dark-bg/30"></div>
+                        <div id="grid-outlet-visits" class="grid grid-cols-7 gap-2"></div>
+                    </div></div>
+                </div>
+
+                <!-- 4. Events Calendar -->
+                <div id="events" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
+                    <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="calendar-range" class="w-5 h-5 text-emerald-500"></i> Company Event Calendar</h3>
+                        <div class="bg-dark-bg text-gray-300 rounded-lg px-3 py-1.5 border border-dark-border text-xs">
+                            Total Events: <strong class="text-emerald-400 text-sm ml-1" id="total-events">0</strong>
                         </div>
                     </div>
+                    
+                    <div class="p-4 border-b border-dark-border flex flex-wrap gap-4 justify-center text-xs">
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">Core Team</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">Managers</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span><span class="font-medium text-gray-400">Training / ODC</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span><span class="font-medium text-gray-400">Holidays</span></div>
+                    </div>
+
+                    <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
+                        <div class="grid grid-cols-7 gap-4 mb-2 text-center text-xs font-semibold uppercase tracking-wider">
+                            <div class="text-brand-500">Sun</div><div class="text-gray-500">Mon</div><div class="text-gray-500">Tue</div><div class="text-gray-500">Wed</div><div class="text-gray-500">Thu</div><div class="text-gray-500">Fri</div><div class="text-gray-500">Sat</div>
+                        </div>
+                        <div id="grid-events" class="grid grid-cols-7 gap-2"></div>
+                    </div></div>
                 </div>
+
             </div>
 
             <!-- ===================== TAB 2: HIERARCHY ===================== -->
             <div id="tab-2" class="tab-content hidden flex flex-col h-full">
-                 <div class="mb-4">
-                    <h2 class="text-xl font-semibold text-white">Organizational Hierarchy</h2>
-                    <p class="text-sm text-gray-400 mb-4">Structural flow charts across 7 distinct organizational branches.</p>
-                    
-                    <!-- 7 Slide Navigation Buttons -->
-                    <div class="flex flex-wrap gap-2 bg-dark-panel p-2 border border-dark-border rounded-xl w-fit">
-                        <button onclick="showOrgSlide(1)" id="btn-org-1" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg bg-brand-500 text-white shadow-lg shadow-brand-500/20 transition-colors">Aluva F&B</button>
-                        <button onclick="showOrgSlide(2)" id="btn-org-2" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Aluva Kitchen</button>
-                        <button onclick="showOrgSlide(3)" id="btn-org-3" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Edachira F&B</button>
-                        <button onclick="showOrgSlide(4)" id="btn-org-4" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Edachira Kitchen</button>
-                        <button onclick="showOrgSlide(5)" id="btn-org-5" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kakkanad</button>
-                        <button onclick="showOrgSlide(6)" id="btn-org-6" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery F&B</button>
-                        <button onclick="showOrgSlide(7)" id="btn-org-7" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery Kitchen</button>
+                 <div class="mb-4 flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-semibold text-white">Organizational Hierarchy</h2>
+                        <p class="text-sm text-gray-400 mb-4">Structural flow charts across 7 distinct organizational branches.</p>
+                        
+                        <!-- 7 Slide Navigation Buttons -->
+                        <div class="flex flex-wrap gap-2 bg-dark-panel p-2 border border-dark-border rounded-xl w-fit">
+                            <button onclick="showOrgSlide(1)" id="btn-org-1" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg bg-brand-500 text-white shadow-lg shadow-brand-500/20 transition-colors">Aluva F&B</button>
+                            <button onclick="showOrgSlide(2)" id="btn-org-2" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Aluva Kitchen</button>
+                            <button onclick="showOrgSlide(3)" id="btn-org-3" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Edachira F&B</button>
+                            <button onclick="showOrgSlide(4)" id="btn-org-4" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Edachira Kitchen</button>
+                            <button onclick="showOrgSlide(5)" id="btn-org-5" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kakkanad</button>
+                            <button onclick="showOrgSlide(6)" id="btn-org-6" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery F&B</button>
+                            <button onclick="showOrgSlide(7)" id="btn-org-7" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery Kitchen</button>
+                        </div>
                     </div>
                 </div>
 
@@ -526,43 +387,43 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s1-root"><div class="org-node-title">Aluva F&B Hierarchy</div></div>
-                                <div class="org-node" id="s1-rm"><div class="org-node-title">RM</div><span class="org-staff-name">Shameer</span></div>
-                                <div class="org-node" id="s1-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name">Jithesh</span></div>
-                                <div class="org-node" id="s1-arm"><div class="org-node-title">ARM</div><span class="org-staff-name">Sachu</span></div>
+                                <div class="org-node" id="s1-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s1-rm"></span></div>
+                                <div class="org-node" id="s1-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name" data-key="s1-fbm"></span></div>
+                                <div class="org-node" id="s1-arm"><div class="org-node-title">ARM</div><span class="org-staff-name" data-key="s1-arm"></span></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s1-gre"><div class="org-node-title">GRE</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s1-cash1"><div class="org-node-title">Cashier 1</div><span class="org-staff-name">Sudev</span></div>
-                                    <div class="org-node" id="s1-cash2"><div class="org-node-title">Cashier 2</div><span class="org-staff-name">Swalih</span></div>
-                                    <div class="org-node" id="s1-cap1"><div class="org-node-title">Captain 1</div><span class="org-staff-name">Anandhu</span></div>
-                                    <div class="org-node" id="s1-cap2"><div class="org-node-title">Captain 2</div><span class="org-staff-name">Karthika</span></div>
-                                    <div class="org-node" id="s1-cap3"><div class="org-node-title">Captain 3</div><span class="org-staff-name">Mili</span></div>
-                                    <div class="org-node" id="s1-cap4"><div class="org-node-title">Captain 4</div><span class="org-staff-name">Reena</span></div>
-                                    <div class="org-node" id="s1-cap5"><div class="org-node-title">Captain 5</div><span class="org-staff-name">Sachu Rajeev</span></div>
-                                    <div class="org-node" id="s1-cap6"><div class="org-node-title">Captain 6</div><span class="org-staff-name">Prayag</span></div>
+                                    <div class="org-node" id="s1-gre"><div class="org-node-title">GRE</div><span class="org-staff-name" data-key="s1-gre"></span></div>
+                                    <div class="org-node" id="s1-cash1"><div class="org-node-title">Cashier 1</div><span class="org-staff-name" data-key="s1-cash1"></span></div>
+                                    <div class="org-node" id="s1-cash2"><div class="org-node-title">Cashier 2</div><span class="org-staff-name" data-key="s1-cash2"></span></div>
+                                    <div class="org-node" id="s1-cap1"><div class="org-node-title">Captain 1</div><span class="org-staff-name" data-key="s1-cap1"></span></div>
+                                    <div class="org-node" id="s1-cap2"><div class="org-node-title">Captain 2</div><span class="org-staff-name" data-key="s1-cap2"></span></div>
+                                    <div class="org-node" id="s1-cap3"><div class="org-node-title">Captain 3</div><span class="org-staff-name" data-key="s1-cap3"></span></div>
+                                    <div class="org-node" id="s1-cap4"><div class="org-node-title">Captain 4</div><span class="org-staff-name" data-key="s1-cap4"></span></div>
+                                    <div class="org-node" id="s1-cap5"><div class="org-node-title">Captain 5</div><span class="org-staff-name" data-key="s1-cap5"></span></div>
+                                    <div class="org-node" id="s1-cap6"><div class="org-node-title">Captain 6</div><span class="org-staff-name" data-key="s1-cap6"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s1-bs1"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s1-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name">Anoop NB</span></div>
-                                    <div class="org-node" id="s1-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name">Akshay</span></div>
-                                    <div class="org-node" id="s1-w3"><div class="org-node-title">Waiter 3</div><span class="org-staff-name">Vincy</span></div>
-                                    <div class="org-node" id="s1-w4"><div class="org-node-title">Waiter 4</div><span class="org-staff-name">Jack Nag</span></div>
-                                    <div class="org-node" id="s1-w5"><div class="org-node-title">Waiter 5</div><span class="org-staff-name">Arjun</span></div>
+                                    <div class="org-node" id="s1-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name" data-key="s1-w1"></span></div>
+                                    <div class="org-node" id="s1-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name" data-key="s1-w2"></span></div>
+                                    <div class="org-node" id="s1-w3"><div class="org-node-title">Waiter 3</div><span class="org-staff-name" data-key="s1-w3"></span></div>
+                                    <div class="org-node" id="s1-w4"><div class="org-node-title">Waiter 4</div><span class="org-staff-name" data-key="s1-w4"></span></div>
+                                    <div class="org-node" id="s1-w5"><div class="org-node-title">Waiter 5</div><span class="org-staff-name" data-key="s1-w5"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s1-bs2"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s1-run"><div class="org-node-title">Runners</div><span class="org-staff-name">Nikka<br>Urmila<br>Bimal</span></div>
-                                    <div class="org-node" id="s1-lift"><div class="org-node-title">Lift</div><span class="org-staff-name">Roopak</span></div>
-                                    <div class="org-node" id="s1-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name">Bijay</span></div>
-                                    <div class="org-node" id="s1-u1"><div class="org-node-title">Utility Boy 1</div><span class="org-staff-name">Nurd Jamal</span></div>
-                                    <div class="org-node" id="s1-u2"><div class="org-node-title">Utility Boy 2</div><span class="org-staff-name">Masesh</span></div>
-                                    <div class="org-node" id="s1-u3"><div class="org-node-title">Utility Boy 3</div><span class="org-staff-name">Abu Sahib</span></div>
-                                    <div class="org-node" id="s1-u4"><div class="org-node-title">Utility Boy 4</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s1-u5"><div class="org-node-title">Utility Boy 5</div><span class="org-staff-name">--------</span></div>
+                                    <div class="org-node" id="s1-run"><div class="org-node-title">Runners</div><span class="org-staff-name" data-key="s1-run"></span></div>
+                                    <div class="org-node" id="s1-lift"><div class="org-node-title">Lift</div><span class="org-staff-name" data-key="s1-lift"></span></div>
+                                    <div class="org-node" id="s1-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name" data-key="s1-pan"></span></div>
+                                    <div class="org-node" id="s1-u1"><div class="org-node-title">Utility Boy 1</div><span class="org-staff-name" data-key="s1-u1"></span></div>
+                                    <div class="org-node" id="s1-u2"><div class="org-node-title">Utility Boy 2</div><span class="org-staff-name" data-key="s1-u2"></span></div>
+                                    <div class="org-node" id="s1-u3"><div class="org-node-title">Utility Boy 3</div><span class="org-staff-name" data-key="s1-u3"></span></div>
+                                    <div class="org-node" id="s1-u4"><div class="org-node-title">Utility Boy 4</div><span class="org-staff-name" data-key="s1-u4"></span></div>
+                                    <div class="org-node" id="s1-u5"><div class="org-node-title">Utility Boy 5</div><span class="org-staff-name" data-key="s1-u5"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -575,53 +436,53 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s2-root"><div class="org-node-title">Aluva Kitchen Hierarchy</div></div>
-                                <div class="org-node" id="s2-exec"><div class="org-node-title">Executive Chef</div><span class="org-staff-name">Vishnu Das</span></div>
-                                <div class="org-node" id="s2-sous"><div class="org-node-title">Sous Chef</div><span class="org-staff-name">Lijo</span></div>
+                                <div class="org-node" id="s2-exec"><div class="org-node-title">Executive Chef</div><span class="org-staff-name" data-key="s2-exec"></span></div>
+                                <div class="org-node" id="s2-sous"><div class="org-node-title">Sous Chef</div><span class="org-staff-name" data-key="s2-sous"></span></div>
                                 
                                 <div class="org-row">
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-ch-hd"><div class="org-node-title">Chinese Head</div><span class="org-staff-name">Jagadish</span></div>
-                                        <div class="org-node" id="s2-ch-ms"><div class="org-node-title">Chinese Master</div><span class="org-staff-name">--------</span></div>
+                                        <div class="org-node" id="s2-ch-hd"><div class="org-node-title">Chinese Head</div><span class="org-staff-name" data-key="s2-ch-hd"></span></div>
+                                        <div class="org-node" id="s2-ch-ms"><div class="org-node-title">Chinese Master</div><span class="org-staff-name" data-key="s2-ch-ms"></span></div>
                                         <div class="org-row">
-                                            <div class="org-node" id="s2-ch-h1"><div class="org-node-title">Chinese Helper 1</div><span class="org-staff-name">--------</span></div>
-                                            <div class="org-node" id="s2-ch-h2"><div class="org-node-title">Chinese Helper 2</div><span class="org-staff-name">--------</span></div>
-                                            <div class="org-node" id="s2-ch-h3"><div class="org-node-title">Chinese Helper 3</div><span class="org-staff-name">--------</span></div>
+                                            <div class="org-node" id="s2-ch-h1"><div class="org-node-title">Chinese Helper 1</div><span class="org-staff-name" data-key="s2-ch-h1"></span></div>
+                                            <div class="org-node" id="s2-ch-h2"><div class="org-node-title">Chinese Helper 2</div><span class="org-staff-name" data-key="s2-ch-h2"></span></div>
+                                            <div class="org-node" id="s2-ch-h3"><div class="org-node-title">Chinese Helper 3</div><span class="org-staff-name" data-key="s2-ch-h3"></span></div>
                                         </div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-al-hd"><div class="org-node-title">Alfaham Head</div><span class="org-staff-name">Majibul</span></div>
-                                        <div class="org-node" id="s2-al-ms"><div class="org-node-title">Alfaham Master</div><span class="org-staff-name">Asif</span></div>
-                                        <div class="org-node" id="s2-al-h1"><div class="org-node-title">Alfaham Helper</div><span class="org-staff-name">Asif Alam</span></div>
+                                        <div class="org-node" id="s2-al-hd"><div class="org-node-title">Alfaham Head</div><span class="org-staff-name" data-key="s2-al-hd"></span></div>
+                                        <div class="org-node" id="s2-al-ms"><div class="org-node-title">Alfaham Master</div><span class="org-staff-name" data-key="s2-al-ms"></span></div>
+                                        <div class="org-node" id="s2-al-h1"><div class="org-node-title">Alfaham Helper</div><span class="org-staff-name" data-key="s2-al-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-ju-hd"><div class="org-node-title">Juice Head</div><span class="org-staff-name">AZARUDDIN</span></div>
-                                        <div class="org-node" id="s2-ju-h1"><div class="org-node-title">Juice Helper</div><span class="org-staff-name">Ranjan Das</span></div>
+                                        <div class="org-node" id="s2-ju-hd"><div class="org-node-title">Juice Head</div><span class="org-staff-name" data-key="s2-ju-hd"></span></div>
+                                        <div class="org-node" id="s2-ju-h1"><div class="org-node-title">Juice Helper</div><span class="org-staff-name" data-key="s2-ju-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-sw-hd"><div class="org-node-title">Shawarma Head</div><span class="org-staff-name">Ajith</span></div>
-                                        <div class="org-node" id="s2-sw-h1"><div class="org-node-title">Shawarma Helper</div><span class="org-staff-name">mohibul</span></div>
+                                        <div class="org-node" id="s2-sw-hd"><div class="org-node-title">Shawarma Head</div><span class="org-staff-name" data-key="s2-sw-hd"></span></div>
+                                        <div class="org-node" id="s2-sw-h1"><div class="org-node-title">Shawarma Helper</div><span class="org-staff-name" data-key="s2-sw-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-pa-hd"><div class="org-node-title">Pantry Head</div><span class="org-staff-name">Sourav</span></div>
-                                        <div class="org-node" id="s2-pa-h1"><div class="org-node-title">Pantry Helper</div><span class="org-staff-name">Bijay Das</span></div>
+                                        <div class="org-node" id="s2-pa-hd"><div class="org-node-title">Pantry Head</div><span class="org-staff-name" data-key="s2-pa-hd"></span></div>
+                                        <div class="org-node" id="s2-pa-h1"><div class="org-node-title">Pantry Helper</div><span class="org-staff-name" data-key="s2-pa-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-po-hd"><div class="org-node-title">Porotta Head</div><span class="org-staff-name">--------</span></div>
+                                        <div class="org-node" id="s2-po-hd"><div class="org-node-title">Porotta Head</div><span class="org-staff-name" data-key="s2-po-hd"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s2-sy-hd"><div class="org-node-title">Shawaya Head</div><span class="org-staff-name">Thohid</span></div>
+                                        <div class="org-node" id="s2-sy-hd"><div class="org-node-title">Shawaya Head</div><span class="org-staff-name" data-key="s2-sy-hd"></span></div>
                                     </div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s2-bs1"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s2-w1"><div class="org-node-title">Washing 1</div><span class="org-staff-name">SUNIL DEV</span></div>
-                                    <div class="org-node" id="s2-w2"><div class="org-node-title">Washing 2</div><span class="org-staff-name">HARIBASI</span></div>
-                                    <div class="org-node" id="s2-w3"><div class="org-node-title">Washing 3</div><span class="org-staff-name">A MAOBA KONYAK</span></div>
-                                    <div class="org-node" id="s2-w4"><div class="org-node-title">Washing 4</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s2-cl1"><div class="org-node-title">Cleaning 1</div><span class="org-staff-name">AYUSH</span></div>
-                                    <div class="org-node" id="s2-cl2"><div class="org-node-title">Cleaning 2</div><span class="org-staff-name">BUDHALAL</span></div>
+                                    <div class="org-node" id="s2-w1"><div class="org-node-title">Washing 1</div><span class="org-staff-name" data-key="s2-w1"></span></div>
+                                    <div class="org-node" id="s2-w2"><div class="org-node-title">Washing 2</div><span class="org-staff-name" data-key="s2-w2"></span></div>
+                                    <div class="org-node" id="s2-w3"><div class="org-node-title">Washing 3</div><span class="org-staff-name" data-key="s2-w3"></span></div>
+                                    <div class="org-node" id="s2-w4"><div class="org-node-title">Washing 4</div><span class="org-staff-name" data-key="s2-w4"></span></div>
+                                    <div class="org-node" id="s2-cl1"><div class="org-node-title">Cleaning 1</div><span class="org-staff-name" data-key="s2-cl1"></span></div>
+                                    <div class="org-node" id="s2-cl2"><div class="org-node-title">Cleaning 2</div><span class="org-staff-name" data-key="s2-cl2"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -634,29 +495,29 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s3-root"><div class="org-node-title">Edachira F&B Hierarchy</div></div>
-                                <div class="org-node" id="s3-rm"><div class="org-node-title">RM</div><span class="org-staff-name">John</span></div>
-                                <div class="org-node" id="s3-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name">Nithin MA</span></div>
+                                <div class="org-node" id="s3-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s3-rm"></span></div>
+                                <div class="org-node" id="s3-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name" data-key="s3-fbm"></span></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s3-cap1"><div class="org-node-title">Captain 1</div><span class="org-staff-name">Vipin DAS</span></div>
-                                    <div class="org-node" id="s3-cap2"><div class="org-node-title">Captain 2</div><span class="org-staff-name">Abhith</span></div>
-                                    <div class="org-node" id="s3-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s3-cashcap"><div class="org-node-title">Cashier/Captain</div><span class="org-staff-name">Nikil</span></div>
+                                    <div class="org-node" id="s3-cap1"><div class="org-node-title">Captain 1</div><span class="org-staff-name" data-key="s3-cap1"></span></div>
+                                    <div class="org-node" id="s3-cap2"><div class="org-node-title">Captain 2</div><span class="org-staff-name" data-key="s3-cap2"></span></div>
+                                    <div class="org-node" id="s3-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name" data-key="s3-cash"></span></div>
+                                    <div class="org-node" id="s3-cashcap"><div class="org-node-title">Cashier/Captain</div><span class="org-staff-name" data-key="s3-cashcap"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s3-bs1"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s3-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name">Nibin</span></div>
-                                    <div class="org-node" id="s3-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name">Njana Prakash</span></div>
-                                    <div class="org-node" id="s3-del"><div class="org-node-title">Delivery/Service</div><span class="org-staff-name">Joel</span></div>
+                                    <div class="org-node" id="s3-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name" data-key="s3-w1"></span></div>
+                                    <div class="org-node" id="s3-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name" data-key="s3-w2"></span></div>
+                                    <div class="org-node" id="s3-del"><div class="org-node-title">Delivery/Service</div><span class="org-staff-name" data-key="s3-del"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s3-bs2"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s3-cl1"><div class="org-node-title">Cleaning 1</div><span class="org-staff-name">Siraj</span></div>
-                                    <div class="org-node" id="s3-cl2"><div class="org-node-title">Cleaning 2</div><span class="org-staff-name">Rinku</span></div>
+                                    <div class="org-node" id="s3-cl1"><div class="org-node-title">Cleaning 1</div><span class="org-staff-name" data-key="s3-cl1"></span></div>
+                                    <div class="org-node" id="s3-cl2"><div class="org-node-title">Cleaning 2</div><span class="org-staff-name" data-key="s3-cl2"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -669,22 +530,22 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s4-root"><div class="org-node-title">Edachira Kitchen Hierarchy</div></div>
-                                <div class="org-node" id="s4-rm"><div class="org-node-title">RM</div><span class="org-staff-name">John</span></div>
-                                <div class="org-node" id="s4-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name">Mansoor</span></div>
+                                <div class="org-node" id="s4-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s4-rm"></span></div>
+                                <div class="org-node" id="s4-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name" data-key="s4-hc"></span></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s4-swms"><div class="org-node-title">Shawarma/Shawaya Master</div><span class="org-staff-name">Kurshid</span></div>
-                                    <div class="org-node" id="s4-jums"><div class="org-node-title">Juice Master</div><span class="org-staff-name">Karim</span></div>
-                                    <div class="org-node" id="s4-rice"><div class="org-node-title">Rice & Starters</div><span class="org-staff-name">Juraij</span></div>
-                                    <div class="org-node" id="s4-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name">Shakil Ahammed</span></div>
-                                    <div class="org-node" id="s4-al2"><div class="org-node-title">Alfaham 2nd Master</div><span class="org-staff-name">Enabul</span></div>
+                                    <div class="org-node" id="s4-swms"><div class="org-node-title">Shawarma/Shawaya Master</div><span class="org-staff-name" data-key="s4-swms"></span></div>
+                                    <div class="org-node" id="s4-jums"><div class="org-node-title">Juice Master</div><span class="org-staff-name" data-key="s4-jums"></span></div>
+                                    <div class="org-node" id="s4-rice"><div class="org-node-title">Rice & Starters</div><span class="org-staff-name" data-key="s4-rice"></span></div>
+                                    <div class="org-node" id="s4-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name" data-key="s4-pan"></span></div>
+                                    <div class="org-node" id="s4-al2"><div class="org-node-title">Alfaham 2nd Master</div><span class="org-staff-name" data-key="s4-al2"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s4-bs1"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s4-w1"><div class="org-node-title">Washing 1</div><span class="org-staff-name">Anzar</span></div>
-                                    <div class="org-node" id="s4-w2"><div class="org-node-title">Washing 2</div><span class="org-staff-name">Mosharaf</span></div>
+                                    <div class="org-node" id="s4-w1"><div class="org-node-title">Washing 1</div><span class="org-staff-name" data-key="s4-w1"></span></div>
+                                    <div class="org-node" id="s4-w2"><div class="org-node-title">Washing 2</div><span class="org-staff-name" data-key="s4-w2"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -697,24 +558,24 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s5-root"><div class="org-node-title">Kakkanad Hierarchy</div></div>
-                                <div class="org-node" id="s5-rm"><div class="org-node-title">RM</div><span class="org-staff-name">Jackson</span></div>
+                                <div class="org-node" id="s5-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s5-rm"></span></div>
                                 
                                 <div class="org-row" style="align-items: flex-start; gap: 32px;">
                                     <div class="org-col">
-                                        <div class="org-node" id="s5-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name">Ashatosh Giri</span></div>
+                                        <div class="org-node" id="s5-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name" data-key="s5-hc"></span></div>
                                         <div class="org-row">
-                                            <div class="org-node" id="s5-swms"><div class="org-node-title">Shawarma/Shawaya Master</div><span class="org-staff-name">Gaffar</span></div>
-                                            <div class="org-node" id="s5-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name">lokesh</span></div>
-                                            <div class="org-node" id="s5-rice"><div class="org-node-title">Rice</div><span class="org-staff-name">Anok</span></div>
-                                            <div class="org-node" id="s5-al2"><div class="org-node-title">Al Faham 2nd Master</div><span class="org-staff-name">Anuwar</span></div>
-                                            <div class="org-node" id="s5-util"><div class="org-node-title">Utility</div><span class="org-staff-name">Babulal</span></div>
+                                            <div class="org-node" id="s5-swms"><div class="org-node-title">Shawarma/Shawaya Master</div><span class="org-staff-name" data-key="s5-swms"></span></div>
+                                            <div class="org-node" id="s5-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name" data-key="s5-pan"></span></div>
+                                            <div class="org-node" id="s5-rice"><div class="org-node-title">Rice</div><span class="org-staff-name" data-key="s5-rice"></span></div>
+                                            <div class="org-node" id="s5-al2"><div class="org-node-title">Al Faham 2nd Master</div><span class="org-staff-name" data-key="s5-al2"></span></div>
+                                            <div class="org-node" id="s5-util"><div class="org-node-title">Utility</div><span class="org-staff-name" data-key="s5-util"></span></div>
                                         </div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s5-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name">Akhil PJ</span></div>
+                                        <div class="org-node" id="s5-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name" data-key="s5-cash"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s5-del"><div class="org-node-title">Delivery Boy</div><span class="org-staff-name">Fasil Babu</span></div>
+                                        <div class="org-node" id="s5-del"><div class="org-node-title">Delivery Boy</div><span class="org-staff-name" data-key="s5-del"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -728,38 +589,38 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s6-root"><div class="org-node-title">Kalamassery F&B Hierarchy</div></div>
-                                <div class="org-node" id="s6-rm"><div class="org-node-title">RM</div><span class="org-staff-name">Vishnu</span></div>
-                                <div class="org-node" id="s6-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name">--------</span></div>
-                                <div class="org-node" id="s6-srcap"><div class="org-node-title">Sr Captain</div><span class="org-staff-name">Sojin</span></div>
+                                <div class="org-node" id="s6-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s6-rm"></span></div>
+                                <div class="org-node" id="s6-fbm"><div class="org-node-title">F&B Manager</div><span class="org-staff-name" data-key="s6-fbm"></span></div>
+                                <div class="org-node" id="s6-srcap"><div class="org-node-title">Sr Captain</div><span class="org-staff-name" data-key="s6-srcap"></span></div>
                                 
                                 <div class="org-black-square" id="s6-bs1"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s6-del"><div class="org-node-title">Delivery Boy</div><span class="org-staff-name">Govind</span></div>
-                                    <div class="org-node" id="s6-gre"><div class="org-node-title">GRE</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s6-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name">Shan</span></div>
-                                    <div class="org-node" id="s6-cashcap"><div class="org-node-title">Cashier/Captain</div><span class="org-staff-name">Sreeraj</span></div>
-                                    <div class="org-node" id="s6-cap"><div class="org-node-title">Captain</div><span class="org-staff-name">Ranish</span></div>
+                                    <div class="org-node" id="s6-del"><div class="org-node-title">Delivery Boy</div><span class="org-staff-name" data-key="s6-del"></span></div>
+                                    <div class="org-node" id="s6-gre"><div class="org-node-title">GRE</div><span class="org-staff-name" data-key="s6-gre"></span></div>
+                                    <div class="org-node" id="s6-cash"><div class="org-node-title">Cashier</div><span class="org-staff-name" data-key="s6-cash"></span></div>
+                                    <div class="org-node" id="s6-cashcap"><div class="org-node-title">Cashier/Captain</div><span class="org-staff-name" data-key="s6-cashcap"></span></div>
+                                    <div class="org-node" id="s6-cap"><div class="org-node-title">Captain</div><span class="org-staff-name" data-key="s6-cap"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s6-bs2"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s6-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name">Thomas</span></div>
-                                    <div class="org-node" id="s6-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name">Ajith</span></div>
-                                    <div class="org-node" id="s6-w3"><div class="org-node-title">Waiter 3</div><span class="org-staff-name">Avinash</span></div>
-                                    <div class="org-node" id="s6-wpt1"><div class="org-node-title">Waiter PT 1</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s6-wpt2"><div class="org-node-title">Waiter PT 2</div><span class="org-staff-name">--------</span></div>
+                                    <div class="org-node" id="s6-w1"><div class="org-node-title">Waiter 1</div><span class="org-staff-name" data-key="s6-w1"></span></div>
+                                    <div class="org-node" id="s6-w2"><div class="org-node-title">Waiter 2</div><span class="org-staff-name" data-key="s6-w2"></span></div>
+                                    <div class="org-node" id="s6-w3"><div class="org-node-title">Waiter 3</div><span class="org-staff-name" data-key="s6-w3"></span></div>
+                                    <div class="org-node" id="s6-wpt1"><div class="org-node-title">Waiter PT 1</div><span class="org-staff-name" data-key="s6-wpt1"></span></div>
+                                    <div class="org-node" id="s6-wpt2"><div class="org-node-title">Waiter PT 2</div><span class="org-staff-name" data-key="s6-wpt2"></span></div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s6-bs3"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s6-dispt"><div class="org-node-title">Dispatch PT</div><span class="org-staff-name">Nihil</span></div>
-                                    <div class="org-node" id="s6-callpt"><div class="org-node-title">Calling PT</div><span class="org-staff-name">--------</span></div>
-                                    <div class="org-node" id="s6-u1"><div class="org-node-title">Utility 1</div><span class="org-staff-name">Salku</span></div>
-                                    <div class="org-node" id="s6-u2"><div class="org-node-title">Utility 2</div><span class="org-staff-name">Azam</span></div>
-                                    <div class="org-node" id="s6-u3"><div class="org-node-title">Utility 3</div><span class="org-staff-name">NAROD</span></div>
+                                    <div class="org-node" id="s6-dispt"><div class="org-node-title">Dispatch PT</div><span class="org-staff-name" data-key="s6-dispt"></span></div>
+                                    <div class="org-node" id="s6-callpt"><div class="org-node-title">Calling PT</div><span class="org-staff-name" data-key="s6-callpt"></span></div>
+                                    <div class="org-node" id="s6-u1"><div class="org-node-title">Utility 1</div><span class="org-staff-name" data-key="s6-u1"></span></div>
+                                    <div class="org-node" id="s6-u2"><div class="org-node-title">Utility 2</div><span class="org-staff-name" data-key="s6-u2"></span></div>
+                                    <div class="org-node" id="s6-u3"><div class="org-node-title">Utility 3</div><span class="org-staff-name" data-key="s6-u3"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -772,46 +633,46 @@
                             
                             <div class="org-col">
                                 <div class="org-node root" id="s7-root"><div class="org-node-title">Kalamassery Kitchen Hierarchy</div></div>
-                                <div class="org-node" id="s7-rm"><div class="org-node-title">RM</div><span class="org-staff-name">Vishnu</span></div>
-                                <div class="org-node" id="s7-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name">--------</span></div>
+                                <div class="org-node" id="s7-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s7-rm"></span></div>
+                                <div class="org-node" id="s7-hc"><div class="org-node-title">Head Chef</div><span class="org-staff-name" data-key="s7-hc"></span></div>
                                 
                                 <div class="org-black-square" id="s7-bs1"></div>
                                 
                                 <div class="org-row">
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-al-hd"><div class="org-node-title">Alfaham Head</div><span class="org-staff-name">Abu naim</span></div>
-                                        <div class="org-node" id="s7-al-h1"><div class="org-node-title">Alfaham Helpers</div><span class="org-staff-name">Sahil</span></div>
+                                        <div class="org-node" id="s7-al-hd"><div class="org-node-title">Alfaham Head</div><span class="org-staff-name" data-key="s7-al-hd"></span></div>
+                                        <div class="org-node" id="s7-al-h1"><div class="org-node-title">Alfaham Helpers</div><span class="org-staff-name" data-key="s7-al-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-ju-hd"><div class="org-node-title">Juice Head</div><span class="org-staff-name">Abrahim</span></div>
+                                        <div class="org-node" id="s7-ju-hd"><div class="org-node-title">Juice Head</div><span class="org-staff-name" data-key="s7-ju-hd"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-sw-hd"><div class="org-node-title">Shawarma Head</div><span class="org-staff-name">Habibur</span></div>
-                                        <div class="org-node" id="s7-sw-h1"><div class="org-node-title">Shawarma Helpers</div><span class="org-staff-name">--------</span></div>
+                                        <div class="org-node" id="s7-sw-hd"><div class="org-node-title">Shawarma Head</div><span class="org-staff-name" data-key="s7-sw-hd"></span></div>
+                                        <div class="org-node" id="s7-sw-h1"><div class="org-node-title">Shawarma Helpers</div><span class="org-staff-name" data-key="s7-sw-h1"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-sy-hd"><div class="org-node-title">Shawaya Head</div><span class="org-staff-name">--------</span></div>
+                                        <div class="org-node" id="s7-sy-hd"><div class="org-node-title">Shawaya Head</div><span class="org-staff-name" data-key="s7-sy-hd"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-pa-hd"><div class="org-node-title">Pantry Head</div><span class="org-staff-name">Shah Alom</span></div>
+                                        <div class="org-node" id="s7-pa-hd"><div class="org-node-title">Pantry Head</div><span class="org-staff-name" data-key="s7-pa-hd"></span></div>
                                         <div class="org-row">
-                                            <div class="org-node" id="s7-r1"><div class="org-node-title">Runner 1</div><span class="org-staff-name">Athosh</span></div>
-                                            <div class="org-node" id="s7-r2"><div class="org-node-title">Runner 2</div><span class="org-staff-name">Sirach R</span></div>
+                                            <div class="org-node" id="s7-r1"><div class="org-node-title">Runner 1</div><span class="org-staff-name" data-key="s7-r1"></span></div>
+                                            <div class="org-node" id="s7-r2"><div class="org-node-title">Runner 2</div><span class="org-staff-name" data-key="s7-r2"></span></div>
                                         </div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-par"><div class="org-node-title">Parcel</div><span class="org-staff-name">--------</span></div>
+                                        <div class="org-node" id="s7-par"><div class="org-node-title">Parcel</div><span class="org-staff-name" data-key="s7-par"></span></div>
                                     </div>
                                     <div class="org-col">
-                                        <div class="org-node" id="s7-rice"><div class="org-node-title">Rice and Starters Head</div><span class="org-staff-name">Bikas</span></div>
+                                        <div class="org-node" id="s7-rice"><div class="org-node-title">Rice and Starters Head</div><span class="org-staff-name" data-key="s7-rice"></span></div>
                                     </div>
                                 </div>
                                 
                                 <div class="org-black-square" id="s7-bs2"></div>
                                 
                                 <div class="org-row">
-                                    <div class="org-node" id="s7-w1"><div class="org-node-title">Washing Staff 1</div><span class="org-staff-name">Munajir</span></div>
-                                    <div class="org-node" id="s7-w2"><div class="org-node-title">Washing Staff 2</div><span class="org-staff-name">MR Alam</span></div>
+                                    <div class="org-node" id="s7-w1"><div class="org-node-title">Washing Staff 1</div><span class="org-staff-name" data-key="s7-w1"></span></div>
+                                    <div class="org-node" id="s7-w2"><div class="org-node-title">Washing Staff 2</div><span class="org-staff-name" data-key="s7-w2"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -834,7 +695,7 @@
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="users" class="w-12 h-12"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">Starting Count</p>
-                        <h3 class="text-3xl font-bold text-white">154</h3>
+                        <h3 class="text-3xl font-bold text-white">137</h3>
                     </div>
 
                     <!-- New Joiners -->
@@ -842,7 +703,7 @@
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-plus" class="w-12 h-12 text-green-400"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">New Joiners</p>
                         <div class="flex items-end gap-2">
-                            <h3 class="text-3xl font-bold text-white">37</h3>
+                            <h3 class="text-3xl font-bold text-white">83</h3>
                             <span class="text-green-400 text-xs font-medium mb-1 flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Added</span>
                         </div>
                     </div>
@@ -851,7 +712,7 @@
                     <div class="bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-minus" class="w-12 h-12 text-red-500"></i></div>
                         <p class="text-red-200 text-sm font-medium mb-1">Resigned</p>
-                        <h3 class="text-3xl font-bold text-red-400">51</h3>
+                        <h3 class="text-3xl font-bold text-red-400">80</h3>
                     </div>
 
                     <!-- Closing Count -->
@@ -874,7 +735,7 @@
                         
                         <div class="flex items-baseline gap-4 mb-2">
                             <h1 class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
-                                34.69%
+                                57.76%
                             </h1>
                         </div>
                         
@@ -882,15 +743,6 @@
                         <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 rounded-lg w-fit mb-6">
                             <i data-lucide="alert-triangle" class="w-4 h-4 text-red-400"></i>
                             <span class="text-red-200 text-sm font-semibold tracking-wide uppercase">Highest till date</span>
-                        </div>
-
-                        <!-- Reasoning -->
-                        <div class="mt-auto bg-black/30 p-4 rounded-lg border border-white/5">
-                            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1 font-semibold">Primary Impact Factor</p>
-                            <p class="text-white font-medium flex items-start gap-2">
-                                <i data-lucide="info" class="w-5 h-5 text-orange-400 shrink-0 mt-0.5"></i>
-                                Election in Bengal, Assam, and Orissa driving mass regional workforce migrations.
-                            </p>
                         </div>
                     </div>
 
@@ -937,7 +789,7 @@
                             
                             <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center">
                                 <span class="text-gray-400 text-sm">Total Attrition Volume</span>
-                                <span class="text-2xl font-bold text-white">51</span>
+                                <span class="text-2xl font-bold text-white">80</span>
                             </div>
                         </div>
                     </div>
@@ -947,7 +799,7 @@
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6 shadow-xl w-full">
                     <h3 class="text-white font-medium text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="line-chart" class="w-5 h-5 text-brand-400"></i>
-                        Historical Attrition Trend (May '25 - Mar '26)
+                        Historical Attrition Trend (Jun '25 - Apr '26)
                     </h3>
                     <div class="h-72 w-full relative">
                         <canvas id="attritionChart"></canvas>
@@ -1027,7 +879,7 @@
                             <h3 class="text-lg font-medium text-white flex items-center gap-2">
                                 <i data-lucide="history" class="w-5 h-5 text-gray-400"></i> Last Month Status
                             </h3>
-                            <span class="text-xs text-gray-400 bg-dark-bg px-2.5 py-1 rounded border border-white/10">March 2026</span>
+                            <span class="text-xs text-gray-400 bg-dark-bg px-2.5 py-1 rounded border border-white/10">April 2026</span>
                         </div>
                         <div class="flex-1 overflow-x-auto">
                             <table class="w-full text-left text-sm text-gray-300 whitespace-nowrap">
@@ -1039,14 +891,13 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-white/5">
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">2</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">2</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">4</td><td class="px-4 py-3 text-right flex justify-end items-center"><span class="bg-red-500/10 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span> Critical</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Runner</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">3</td><td class="px-4 py-3 text-right"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Executive Chef</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">1</td><td class="px-4 py-3 text-right"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RGM</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">1</td><td class="px-4 py-3 text-right"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain/Cashier</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">1</td><td class="px-4 py-3 text-right"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter Part-time</td><td class="px-4 py-3 text-center text-gray-500">-</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">4 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">13 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">7 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">9 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">5 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">4 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">6 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Head Chef</td><td class="px-4 py-3 text-center text-gray-500">-</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Digital Marketing</td><td class="px-4 py-3 text-center text-gray-500">-</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                 </tbody>
@@ -1063,7 +914,7 @@
                             <h3 class="text-lg font-medium text-white flex items-center gap-2">
                                 <i data-lucide="crosshair" class="w-5 h-5 text-brand-400"></i> Current Month Status
                             </h3>
-                            <span class="text-xs text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/30 font-medium tracking-wide uppercase shadow-[0_0_10px_rgba(249,115,22,0.2)]">Active (April)</span>
+                            <span class="text-xs text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/30 font-medium tracking-wide uppercase shadow-[0_0_10px_rgba(249,115,22,0.2)]">Active (May)</span>
                         </div>
                         <div class="flex-1 overflow-x-auto relative z-10">
                             <table class="w-full text-left text-sm text-gray-300 whitespace-nowrap">
@@ -1077,85 +928,17 @@
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors bg-brand-500/5"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-right"><span class="bg-brand-500/20 text-brand-400 border border-brand-500/40 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 justify-end w-fit ml-auto"><i data-lucide="alert-circle" class="w-3 h-3"></i> New Gap</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors bg-brand-500/5"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-right"><span class="bg-brand-500/20 text-brand-400 border border-brand-500/40 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 justify-end w-fit ml-auto"><i data-lucide="alert-circle" class="w-3 h-3"></i> New Gap</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors bg-brand-500/5"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-right"><span class="bg-brand-500/20 text-brand-400 border border-brand-500/40 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 justify-end w-fit ml-auto"><i data-lucide="alert-circle" class="w-3 h-3"></i> New Gap</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors bg-brand-500/5"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-right"><span class="bg-brand-500/20 text-brand-400 border border-brand-500/40 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 justify-end w-fit ml-auto"><i data-lucide="alert-circle" class="w-3 h-3"></i> New Gap</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors bg-brand-500/5"><td class="px-4 py-3 font-medium text-white">Helpers</td><td class="px-4 py-3 text-right"><span class="bg-brand-500/20 text-brand-400 border border-brand-500/40 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 justify-end w-fit ml-auto"><i data-lucide="alert-circle" class="w-3 h-3"></i> New Gap</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Head Chef</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Digital Marketing</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RGM</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">F&B manager</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">GM</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Staff Leaving for Election Section -->
-                <div class="bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-6 shadow-xl w-full relative overflow-hidden">
-                    <!-- Glow effect -->
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-500/10 blur-3xl rounded-full pointer-events-none"></div>
-                    
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10 relative z-10">
-                        <div class="flex items-center gap-3">
-                            <div class="p-2 bg-red-500/20 rounded-lg border border-red-500/30">
-                                <i data-lucide="user-minus" class="w-6 h-6 text-red-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium text-white">Staff Leaving for Election</h3>
-                                <p class="text-xs text-red-300/70 mt-1">Immediate impact analysis of workforce migration by outlet.</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Total Impact</p>
-                            <h2 class="text-3xl font-bold text-red-400">26 <span class="text-sm font-medium text-gray-500">Staff</span></h2>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                        <!-- Aluva -->
-                        <div class="bg-black/20 rounded-lg border border-white/5 overflow-hidden">
-                            <div class="bg-dark-panel p-3 border-b border-white/5 flex justify-between items-center">
-                                <h4 class="text-white font-medium flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i> Aluva</h4>
-                                <span class="bg-white/10 text-white text-xs px-2.5 py-1 rounded font-semibold">16</span>
-                            </div>
-                            <ul class="p-4 space-y-2.5 text-sm text-gray-300">
-                                <li class="flex justify-between items-center"><span>Butchery</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">3</span></li>
-                                <li class="flex justify-between items-center"><span>Washing</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">3</span></li>
-                                <li class="flex justify-between items-center"><span>Cleaning</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">3</span></li>
-                                <li class="flex justify-between items-center"><span>Salad</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">2</span></li>
-                                <li class="flex justify-between items-center"><span>Shawarma Master</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Shawaya master</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Backend gravy</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                            </ul>
-                        </div>
-                        
-                        <!-- KLY -->
-                        <div class="bg-black/20 rounded-lg border border-white/5 overflow-hidden h-fit">
-                            <div class="bg-dark-panel p-3 border-b border-white/5 flex justify-between items-center">
-                                <h4 class="text-white font-medium flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-blue-400"></i> KLY</h4>
-                                <span class="bg-white/10 text-white text-xs px-2.5 py-1 rounded font-semibold">5</span>
-                            </div>
-                            <ul class="p-4 space-y-2.5 text-sm text-gray-300">
-                                <li class="flex justify-between items-center"><span>Washing</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">2</span></li>
-                                <li class="flex justify-between items-center"><span>Runner</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Rice and starterce</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Shawarma Master</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Edachira -->
-                        <div class="bg-black/20 rounded-lg border border-white/5 overflow-hidden h-fit">
-                            <div class="bg-dark-panel p-3 border-b border-white/5 flex justify-between items-center">
-                                <h4 class="text-white font-medium flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-purple-400"></i> Edachira</h4>
-                                <span class="bg-white/10 text-white text-xs px-2.5 py-1 rounded font-semibold">5</span>
-                            </div>
-                            <ul class="p-4 space-y-2.5 text-sm text-gray-300">
-                                <li class="flex justify-between items-center"><span>Washing</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Kitchen helper</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Cleaning</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Alfaham Helper</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                                <li class="flex justify-between items-center"><span>Shawaya/Shawarma Master</span><span class="font-medium text-white bg-white/5 px-2 py-0.5 rounded">1</span></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1174,7 +957,7 @@
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Total Cost</p>
-                            <h2 class="text-3xl font-bold text-emerald-400">₹43,897</h2>
+                            <h2 class="text-3xl font-bold text-emerald-400">₹8,197</h2>
                         </div>
                     </div>
 
@@ -1199,35 +982,15 @@
                                     <td class="px-4 py-3 text-right font-semibold text-white">5,900</td>
                                 </tr>
                                 <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Regal Consultancy</td>
+                                    <td class="px-4 py-3 font-medium text-white">Referral</td>
                                     <td class="px-4 py-3 text-gray-400">-</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">24,000</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Jithesh referral (Muneer)</td>
-                                    <td class="px-4 py-3 text-gray-400">Shawarma Master</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">1,500</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Staff</td>
-                                    <td class="px-4 py-3 text-gray-400">Relocation fund</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">200</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Abhilash</td>
-                                    <td class="px-4 py-3 text-gray-400">12 staff referral</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">9,000</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Abhilash</td>
-                                    <td class="px-4 py-3 text-gray-400">2 Alfaham master/Helper</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">1,500</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-white">500</td>
                                 </tr>
                             </tbody>
                             <tfoot class="bg-black/40 font-bold border-t border-white/10">
                                 <tr>
                                     <td colspan="2" class="px-4 py-4 text-right text-gray-300 uppercase tracking-wider text-xs">Total Expenditure</td>
-                                    <td class="px-4 py-4 text-right text-emerald-400 text-base">₹43,897</td>
+                                    <td class="px-4 py-4 text-right text-emerald-400 text-base">₹8,197</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -1266,15 +1029,14 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-white/5">
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">PM</td><td class="px-4 py-3 font-bold text-red-400">550</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">HR</td><td class="px-4 py-3 font-bold text-red-400">200</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">John</td><td class="px-4 py-3 font-bold text-red-400">250</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">OM</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Jithesh</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Nithin</td><td class="px-4 py-3 font-bold text-red-400">75</td><td class="px-4 py-3 text-gray-400">IN/OUT</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">SACHU</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">IN/OUT</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shameer</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Faies</td><td class="px-4 py-3 font-bold text-red-400">25</td><td class="px-4 py-3 text-gray-400">Dap/Dar</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">PM</td><td class="px-4 py-3 font-bold text-red-400">800</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">HR</td><td class="px-4 py-3 font-bold text-red-400">650</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">BDM</td><td class="px-4 py-3 font-bold text-red-400">250</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Jithesh</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Jackson</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Nithin</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Vishnu</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">John</td><td class="px-4 py-3 font-bold text-red-400">125</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1294,14 +1056,43 @@
                                 </div>
                             </div>
                             
-                            <div class="bg-black/20 p-4 rounded-lg border border-white/5">
-                                <div class="flex items-start gap-3">
-                                    <i data-lucide="bed" class="w-5 h-5 text-brand-400 mt-0.5"></i>
-                                    <div>
-                                        <h4 class="text-white font-medium mb-1">Bed Policy</h4>
-                                        <p class="text-xs text-gray-400 leading-relaxed">
-                                            New Bed Policy has been implemented.
-                                        </p>
+                            <div class="space-y-4">
+                                <!-- Leave Policy -->
+                                <div class="bg-black/20 p-4 rounded-lg border border-white/5">
+                                    <div class="flex items-start gap-3">
+                                        <i data-lucide="calendar-clock" class="w-5 h-5 text-brand-400 mt-0.5"></i>
+                                        <div>
+                                            <h4 class="text-white font-medium mb-1">Leave Policy Revised</h4>
+                                            <p class="text-xs text-gray-400 leading-relaxed">
+                                                Updated guidelines for leave tracking and approvals.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Reference Policy -->
+                                <div class="bg-black/20 p-4 rounded-lg border border-white/5">
+                                    <div class="flex items-start gap-3">
+                                        <i data-lucide="users" class="w-5 h-5 text-purple-400 mt-0.5"></i>
+                                        <div>
+                                            <h4 class="text-white font-medium mb-1">Reference Policy Revised</h4>
+                                            <p class="text-xs text-gray-400 leading-relaxed">
+                                                Revised structure for the employee referral program.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Onboarding SOP -->
+                                <div class="bg-black/20 p-4 rounded-lg border border-white/5">
+                                    <div class="flex items-start gap-3">
+                                        <i data-lucide="book-open-check" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                        <div>
+                                            <h4 class="text-white font-medium mb-1">New Staff Onboarding SOP added</h4>
+                                            <p class="text-xs text-gray-400 leading-relaxed">
+                                                Standard Operating Procedure added for smooth inductions.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1319,34 +1110,8 @@
                                 </div>
                             </div>
                             
-                            <div class="space-y-3">
-                                <!-- Item 1 -->
-                                <div class="bg-black/20 p-3 rounded-lg border border-white/5 flex justify-between items-center">
-                                    <span class="text-white font-medium text-sm">THOMAS GLADSON</span>
-                                    <div class="flex items-center gap-2 text-xs font-bold">
-                                        <span class="text-gray-400">15000</span>
-                                        <i data-lucide="arrow-right" class="w-3 h-3 text-green-400"></i>
-                                        <span class="text-green-400">16000</span>
-                                    </div>
-                                </div>
-                                <!-- Item 2 -->
-                                <div class="bg-black/20 p-3 rounded-lg border border-white/5 flex justify-between items-center">
-                                    <span class="text-white font-medium text-sm">SOURAV DAS</span>
-                                    <div class="flex items-center gap-2 text-xs font-bold">
-                                        <span class="text-gray-400">700</span>
-                                        <i data-lucide="arrow-right" class="w-3 h-3 text-green-400"></i>
-                                        <span class="text-green-400">800</span>
-                                    </div>
-                                </div>
-                                <!-- Item 3 -->
-                                <div class="bg-black/20 p-3 rounded-lg border border-white/5 flex justify-between items-center">
-                                    <span class="text-white font-medium text-sm">MD GAFER</span>
-                                    <div class="flex items-center gap-2 text-xs font-bold">
-                                        <span class="text-gray-400">900</span>
-                                        <i data-lucide="arrow-right" class="w-3 h-3 text-green-400"></i>
-                                        <span class="text-green-400">1100</span>
-                                    </div>
-                                </div>
+                            <div id="salary-hikes-container" class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar-hide">
+                                <!-- Dynamic content will be injected here -->
                             </div>
                         </div>
                     </div>
@@ -1452,48 +1217,250 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Tab Switching Logic
+        // ============================================
+        // HIERARCHY DATA LOGIC
+        // ============================================
+        const staffData = {
+            // SLIDE 1: Aluva F&B
+            "s1-rm": "Shameer",
+            "s1-fbm": "Jithesh",
+            "s1-arm": "Sachu",
+            "s1-gre": "Princy R",
+            "s1-cash1": "Sudev",
+            "s1-cash2": "Swalih",
+            "s1-cap1": "H Akiu",
+            "s1-cap2": "Karthika",
+            "s1-cap3": "Jithin",
+            "s1-cap4": "Arjun",
+            "s1-cap5": "Sachu Rajeev",
+            "s1-cap6": "Vincy",
+            "s1-w1": "CHINGNYU POANGMAI",
+            "s1-w2": "EYEM PONGLHON",
+            "s1-w3": "MARY BMONYU A",
+            "s1-w4": "ENYEM A",
+            "s1-w5": "NYANGYA KONYAK",
+            "s1-run": "Ajay",
+            "s1-lift": "Roopak",
+            "s1-pan": "--------",
+            "s1-u1": "Eyaj Uddin",
+            "s1-u2": "Musaddik Alam",
+            "s1-u3": "Umar Faruk",
+            "s1-u4": "Roni Samanta",
+            "s1-u5": "Musaraf Husen",
+
+            // SLIDE 2: Aluva Kitchen
+            "s2-exec": "--------",
+            "s2-sous": "--------",
+            "s2-ch-hd": "Rajesh Saha",
+            "s2-ch-ms": "Chona Rabha",
+            "s2-ch-h1": "Binendra Rabha",
+            "s2-ch-h2": "--------",
+            "s2-ch-h3": "--------",
+            "s2-al-hd": "Sabir",
+            "s2-al-ms": "Asif",
+            "s2-al-h1": "Bimal Das",
+            "s2-ju-hd": "AZARUDDIN",
+            "s2-ju-h1": "Abu Sahib",
+            "s2-sw-hd": "Ajit",
+            "s2-sw-h1": "Ranjan Das",
+            "s2-pa-hd": "Bijay Das",
+            "s2-pa-h1": "Sourav",
+            "s2-po-hd": "--------",
+            "s2-sy-hd": "Dhoni",
+            "s2-w1": "SUNIL DEV",
+            "s2-w2": "HARIBASI",
+            "s2-w3": "Kamarao",
+            "s2-w4": "--------",
+            "s2-cl1": "Rakibul",
+            "s2-cl2": "Bhoveswar Tosha",
+
+            // SLIDE 3: Edachira F&B
+            "s3-rm": "John",
+            "s3-fbm": "Nithin MA",
+            "s3-cap1": "Vipin DAS",
+            "s3-cap2": "Nipin",
+            "s3-cash": "--------",
+            "s3-cashcap": "Nikil",
+            "s3-w1": "Njana Prakash",
+            "s3-w2": "Abhith",
+            "s3-del": "Joel",
+            "s3-cl1": "Panyel",
+            "s3-cl2": "Rinku",
+
+            // SLIDE 4: Edachira Kitchen
+            "s4-rm": "John",
+            "s4-hc": "Mansoor",
+            "s4-swms": "--------",
+            "s4-jums": "Karim",
+            "s4-rice": "Juraij",
+            "s4-pan": "Samim",
+            "s4-al2": "Arman",
+            "s4-w1": "Anzar",
+            "s4-w2": "--------",
+
+            // SLIDE 5: Kakkanad
+            "s5-rm": "Jackson",
+            "s5-hc": "Ashatosh Giri",
+            "s5-swms": "Gaffar",
+            "s5-pan": "Ram Bahadur",
+            "s5-rice": "Anok",
+            "s5-al2": "--------",
+            "s5-util": "Dipak",
+            "s5-cash": "Akhil PJ",
+            "s5-del": "Fasil Babu",
+
+            // SLIDE 6: Kalamassery F&B
+            "s6-rm": "Vishnu",
+            "s6-fbm": "--------",
+            "s6-srcap": "Sojin",
+            "s6-del": "Govind",
+            "s6-gre": "--------",
+            "s6-cash": "Shan",
+            "s6-cashcap": "Ranish VA",
+            "s6-cap": "Reeraj",
+            "s6-w1": "Salman Sajeer",
+            "s6-w2": "Jinto Mathew",
+            "s6-w3": "Ganeshan",
+            "s6-wpt1": "--------",
+            "s6-wpt2": "--------",
+            "s6-dispt": "--------",
+            "s6-callpt": "--------",
+            "s6-u1": "Salku",
+            "s6-u2": "--------",
+            "s6-u3": "--------",
+
+            // SLIDE 7: Kalamassery Kitchen
+            "s7-rm": "Vishnu",
+            "s7-hc": "--------",
+            "s7-al-hd": "Aslam",
+            "s7-al-h1": "Sahil Ansari",
+            "s7-ju-hd": "Abrahim",
+            "s7-sw-hd": "Amjad Mohiddin",
+            "s7-sw-h1": "Azam",
+            "s7-sy-hd": "Samir Ansari",
+            "s7-pa-hd": "Shah Alom",
+            "s7-r1": "Athosh",
+            "s7-r2": "Sirach R",
+            "s7-par": "Bikas",
+            "s7-rice": "Abdul Hannan",
+            "s7-w1": "MD Munajir",
+            "s7-w2": "MR Alam"
+        };
+
+        function loadStaffNames() {
+            document.querySelectorAll('.org-staff-name').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (staffData[key] !== undefined) {
+                    el.innerHTML = staffData[key];
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', loadStaffNames);
+
+
+        // ============================================
+        // CORE TABS LOGIC
+        // ============================================
+
+        // Main Tab Switching Logic
         function switchTab(targetTabId) {
-            // 1. Hide all content panels
             document.querySelectorAll('.tab-content').forEach(panel => {
                 panel.classList.add('hidden');
             });
-
-            // 2. Reset all buttons to inactive state
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                // Remove active classes
                 btn.classList.remove('bg-brand-500/10', 'text-brand-400', 'border-brand-500');
-                // Add inactive classes
                 btn.classList.add('border-transparent', 'text-gray-400');
             });
 
-            // 3. Show target content panel
             const targetContent = document.getElementById(targetTabId);
-            if(targetContent) {
-                targetContent.classList.remove('hidden');
-            }
+            if(targetContent) targetContent.classList.remove('hidden');
 
-            // 4. Set target button to active state
             const targetBtn = document.querySelector(`[data-tab="${targetTabId}"]`);
             if(targetBtn) {
                 targetBtn.classList.remove('border-transparent', 'text-gray-400');
                 targetBtn.classList.add('bg-brand-500/10', 'text-brand-400', 'border-brand-500');
             }
 
-            // 5. Trigger resize for Hierarchy tab to draw lines correctly when tab becomes visible
             if(targetTabId === 'tab-2') {
                 setTimeout(fitOrgToScreen, 50);
             }
         }
 
-        // Attach event listeners to all tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Use currentTarget to ensure we get the button's data attribute, even if an icon is clicked
                 const tabId = e.currentTarget.getAttribute('data-tab');
                 switchTab(tabId);
             });
         });
+
+        // --- Sub-Tab Switching Logic (For Calendars) ---
+        function switchSubTab(tabId) {
+            document.querySelectorAll('.sub-tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-sm', 'font-semibold');
+                btn.classList.add('text-gray-400', 'font-medium', 'hover:text-white', 'hover:bg-dark-border', 'border-transparent');
+            });
+
+            const targetContent = document.getElementById(tabId);
+            if(targetContent) {
+                targetContent.classList.remove('hidden');
+                targetContent.classList.add('block');
+            }
+            
+            const activeBtn = document.getElementById(`sub-tab-btn-${tabId}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-gray-400', 'font-medium', 'hover:text-white', 'hover:bg-dark-border', 'border-transparent');
+                activeBtn.classList.add('bg-brand-500', 'text-white', 'shadow-sm', 'font-semibold');
+            }
+        }
+
+        // --- Generic Calendar Renderer ---
+        function renderCalendarGrid(containerId, dayRendererFn) {
+            const grid = document.getElementById(containerId);
+            if (!grid) return;
+            
+            let html = '';
+            const daysInMonth = 31;
+            const startingDayOfWeek = 5; // Friday
+            const prevMonthDays = 30; // April
+            
+            // Previous month cells
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const dayNum = prevMonthDays - startingDayOfWeek + i + 1;
+                html += `<div class="min-h-[100px] sm:min-h-[130px] rounded-xl bg-dark-bg/30 border border-dark-border p-2 opacity-50"><span class="text-sm font-medium text-gray-600">${dayNum}</span></div>`;
+            }
+
+            // Current month cells
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isWeekend = (day + startingDayOfWeek - 1) % 7 === 0 || (day + startingDayOfWeek - 1) % 7 === 6;
+                const bgClass = isWeekend ? 'bg-dark-bg/50' : 'bg-dark-panel';
+                const textClass = (day + startingDayOfWeek - 1) % 7 === 0 ? 'text-brand-500' : 'text-gray-300';
+                
+                const contentHtml = dayRendererFn(day);
+
+                html += `
+                    <div class="min-h-[100px] sm:min-h-[130px] rounded-xl ${bgClass} border border-dark-border p-2 hover:border-gray-500 transition-colors duration-200 flex flex-col group overflow-hidden">
+                        <span class="text-sm font-semibold ${textClass} mb-1 group-hover:text-white transition-colors">${day}</span>
+                        <div class="flex-1 flex flex-col justify-start overflow-y-auto gap-1.5 pr-1 pb-1 custom-scrollbar-hide">
+                            ${contentHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Next month cells
+            const totalCells = startingDayOfWeek + daysInMonth;
+            const remainingCells = (7 - (totalCells % 7)) % 7;
+            for (let i = 1; i <= remainingCells; i++) {
+                html += `<div class="min-h-[100px] sm:min-h-[130px] rounded-xl bg-dark-bg/30 border border-dark-border p-2 opacity-50"><span class="text-sm font-medium text-gray-600">${i}</span></div>`;
+            }
+
+            grid.innerHTML = html;
+        }
 
         // --- Organizational Hierarchy Logic ---
         let currentOrgSlide = 1;
@@ -1584,7 +1551,7 @@
             connect('slide6', 's6-bs1', ['s6-del', 's6-gre', 's6-cash', 's6-cashcap', 's6-cap']);
             connect('slide6', 's6-del', ['s6-bs2']);
             connect('slide6', 's6-gre', ['s6-bs2']);
-            connect('slide6', 's6-cash', ['s6-bs2']);
+            connect('slide6', 's6-cash', ['s6-cashcap', 's6-bs2']);
             connect('slide6', 's6-cashcap', ['s6-bs2']);
             connect('slide6', 's6-cap', ['s6-bs2']);
             connect('slide6', 's6-bs2', ['s6-w1', 's6-w2', 's6-w3', 's6-wpt1', 's6-wpt2']);
@@ -1617,10 +1584,7 @@
         function showOrgSlide(index) {
             currentOrgSlide = index;
             
-            // Hide all slides
             document.querySelectorAll('.org-slide').forEach(s => s.classList.remove('active'));
-            
-            // Update button styles
             document.querySelectorAll('.org-nav-btn').forEach((btn, i) => {
                 if(i + 1 === index) {
                     btn.classList.remove('bg-dark-panel', 'border', 'border-dark-border', 'text-gray-400', 'hover:bg-dark-border');
@@ -1631,17 +1595,13 @@
                 }
             });
             
-            // Show new slide
             const newSlide = document.getElementById(`slide${index}`);
             if(newSlide) {
                 newSlide.classList.add('active');
-                
-                // Restart animation
                 const content = newSlide.querySelector('.org-slide-content');
                 content.style.animation = 'none';
                 void content.offsetWidth;
                 content.style.animation = null;
-
                 fitOrgToScreen();
             }
         }
@@ -1666,7 +1626,6 @@
             const scale = Math.min(scaleX, scaleY, 1);
             
             content.style.transform = `scale(${scale})`;
-            
             setTimeout(() => drawOrgLines(scale), 50);
         }
 
@@ -1713,34 +1672,249 @@
         }
 
         // --- Initialization ---
-
-        // Initialize default tab (Tab 0)
-        switchTab('tab-0');
-        
-        // Initialize Hierarchy Connections and listeners
-        initOrgConnections();
-        window.addEventListener('resize', fitOrgToScreen);
-
-        // Initialize Attrition Trend Chart
         document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('attritionChart').getContext('2d');
+            // Initialize default tab (Tab 0)
+            switchTab('tab-0');
             
-            // Create gradient fill for the bars
+            // Initialize Hierarchy Connections and listeners
+            initOrgConnections();
+            window.addEventListener('resize', fitOrgToScreen);
+
+            // ============================================
+            // 1. Core Team Leaves Data & Rendering
+            // ============================================
+            const coreLeaveData = {
+                PM: [4, 5, 6],
+                FM: [2, 3, 4, 10, 17, 24, 31],
+                BDM: [10, 11, 12, 28],
+                HR: [3, 10, 17, 24, 31],
+                GM: [3, 10, 17, 24, 31],
+                Chef: [18, 19, 20]
+            };
+            const coreRoleStyles = {
+                PM: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                FM: 'bg-green-500/20 text-green-400 border-green-500/30',
+                BDM: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                HR: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
+                GM: 'bg-brand-500/20 text-brand-400 border-brand-500/30',
+                Chef: 'bg-teal-500/20 text-teal-400 border-teal-500/30'
+            };
+            
+            const coreLeaveMap = {};
+            let totalCoreLeaves = 0;
+            for (const [role, dates] of Object.entries(coreLeaveData)) {
+                dates.forEach(date => {
+                    if (!coreLeaveMap[date]) coreLeaveMap[date] = [];
+                    coreLeaveMap[date].push(role);
+                    totalCoreLeaves++;
+                });
+            }
+            document.getElementById('total-core-leaves').innerText = totalCoreLeaves;
+
+            renderCalendarGrid('grid-core-leaves', (day) => {
+                if (!coreLeaveMap[day]) return '';
+                return coreLeaveMap[day].map(role => `
+                    <div class="text-[10px] font-semibold px-2 py-0.5 rounded border shadow-sm cursor-default w-fit ${coreRoleStyles[role]}">
+                        ${role}
+                    </div>
+                `).join('');
+            });
+
+            // ============================================
+            // 2. Managers Leaves Data & Rendering
+            // ============================================
+            const managerLeaveData = {
+                John: [3, 10, 23],
+                Shameer: [19, 20, 21],
+                Gerald: [6, 7, 13, 14],
+                Nithin: [5, 17, 24],
+                Jackson: [9, 19]
+            };
+            const managerStyles = {
+                John: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                Shameer: 'bg-green-500/20 text-green-400 border-green-500/30',
+                Gerald: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                Nithin: 'bg-brand-500/20 text-brand-400 border-brand-500/30',
+                Jackson: 'bg-teal-500/20 text-teal-400 border-teal-500/30'
+            };
+            
+            const managerLeaveMap = {};
+            let totalManagerLeaves = 0;
+            for (const [role, dates] of Object.entries(managerLeaveData)) {
+                dates.forEach(date => {
+                    if (!managerLeaveMap[date]) managerLeaveMap[date] = [];
+                    managerLeaveMap[date].push(role);
+                    totalManagerLeaves++;
+                });
+            }
+            document.getElementById('total-manager-leaves').innerText = totalManagerLeaves;
+
+            renderCalendarGrid('grid-manager-leaves', (day) => {
+                if (!managerLeaveMap[day]) return '';
+                return managerLeaveMap[day].map(role => `
+                    <div class="text-[10px] font-semibold px-2 py-0.5 rounded border shadow-sm cursor-default w-fit ${managerStyles[role]}">
+                        ${role}
+                    </div>
+                `).join('');
+            });
+
+            // ============================================
+            // 3. Outlet Visits Data & Rendering
+            // ============================================
+            const visitData = {
+                BDM: { 3: 'EDA', 10: 'KKD', 17: 'KLY', 24: 'ALV' },
+                HR: { 11: 'Edachira', 13: 'KKD', 18: 'KLY', 20: 'Aluva' },
+                FM: { 13: 'Alv, Kly', 21: 'Info, KKD' },
+                PM: { 3: 'All Outlets' }
+            };
+            const visitStyles = {
+                BDM: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                HR: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
+                FM: 'bg-green-500/20 text-green-400 border-green-500/30',
+                PM: 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+            };
+
+            const visitMap = {};
+            let totalVisits = 0;
+            for (const [role, visits] of Object.entries(visitData)) {
+                for (const [date, location] of Object.entries(visits)) {
+                    if (!visitMap[date]) visitMap[date] = [];
+                    visitMap[date].push({ role, location });
+                    totalVisits++;
+                }
+            }
+            document.getElementById('total-visits').innerText = totalVisits;
+
+            renderCalendarGrid('grid-outlet-visits', (day) => {
+                if (!visitMap[day]) return '';
+                return visitMap[day].map(visit => `
+                    <div class="px-2 py-1 rounded border shadow-sm cursor-default flex flex-col ${visitStyles[visit.role]}">
+                        <span class="text-[10px] font-bold">${visit.role}</span>
+                        <span class="text-[9px] font-medium leading-tight opacity-90 truncate">${visit.location}</span>
+                    </div>
+                `).join('');
+            });
+
+            // ============================================
+            // 4. Events Data & Rendering
+            // ============================================
+            const eventData = {
+                2: [{ type: 'core', title: 'Core team Report Review meeting with GM' }],
+                5: [{ type: 'core', title: 'Purchase + B.D.M Report Review meeting with GM' }],
+                6: [{ type: 'managers', title: 'Managers meeting' }],
+                7: [{ type: 'core', title: 'Core Team Trial Meeting' }],
+                8: [{ type: 'core', title: 'Core Team Meeting' }],
+                11: [{ type: 'training', title: 'O.D.C' }],
+                12: [{ type: 'training', title: 'O.D.C' }],
+                13: [{ type: 'managers', title: 'Managers meeting' }],
+                15: [{ type: 'core', title: 'Marketing Calendar' }],
+                16: [{ type: 'core', title: 'Core Team Meeting' }],
+                18: [{ type: 'training', title: 'Induction Training' }],
+                19: [{ type: 'training', title: 'Induction Training' }],
+                20: [{ type: 'managers', title: 'Managers Meeting' }],
+                21: [{ type: 'training', title: 'O.J.T' }],
+                23: [{ type: 'core', title: 'Core team Meeting' }],
+                25: [{ type: 'training', title: 'O.J.T' }],
+                26: [{ type: 'managers', title: 'Managers meeting for Bakrid planning' }],
+                27: [{ type: 'holiday', title: 'Bakrid' }],
+                30: [{ type: 'core', title: 'Core team meeting' }]
+            };
+            const eventStyles = {
+                core: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                managers: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                training: 'bg-brand-500/20 text-brand-400 border-brand-500/30',
+                holiday: 'bg-rose-500/20 text-rose-400 border-rose-500/30'
+            };
+
+            let totalEvents = 0;
+            for (const date in eventData) totalEvents += eventData[date].length;
+            document.getElementById('total-events').innerText = totalEvents;
+
+            renderCalendarGrid('grid-events', (day) => {
+                if (!eventData[day]) return '';
+                return eventData[day].map(event => `
+                    <div class="text-[9px] sm:text-[10px] leading-tight font-medium px-1.5 py-1 rounded border shadow-sm cursor-default whitespace-normal break-words ${eventStyles[event.type]}" title="${event.title}">
+                        ${event.title}
+                    </div>
+                `).join('');
+            });
+
+            // ============================================
+            // 5. Salary Hikes Data & Rendering
+            // ============================================
+            const salaryHikesData = [
+                { name: "Rekha C K", old: 28000, new: 33000 },
+                { name: "Teena Thomas", old: 22000, new: 25000 },
+                { name: "Suresh", old: 50000, new: 60000 },
+                { name: "Logesh", old: 55000, new: 65000 },
+                { name: "John", old: 40000, new: 45000 },
+                { name: "ANANDHU", old: 20000, new: 22000 },
+                { name: "ANOOP BASKARAN", old: 27000, new: 30000 },
+                { name: "MD SWALIH", old: 18000, new: 20000 },
+                { name: "KARTHIKA", old: 18000, new: 20000 },
+                { name: "JOBIN PJ", old: 22000, new: 25000 },
+                { name: "SALNAS C N", old: 16000, new: 18000 },
+                { name: "GERALD .V VALAN", old: 47000, new: 50000 },
+                { name: "RAPHEAL JACKSON", old: 30000, new: 33000 },
+                { name: "NIBIN", old: 20000, new: 23000 },
+                { name: "AJITH", old: 17000, new: 19000 },
+                { name: "MUHAMMED FAIES", old: 20000, new: 23000 },
+                { name: "RAKESH", old: 65000, new: 85000 },
+                { name: "DHAN", old: 700, new: 800 },
+                { name: "MAJIBUL", old: 650, new: 650 },
+                { name: "ASIF", old: 650, new: 800 },
+                { name: "ASHATOSH GIRI", old: 1100, new: 1200 },
+                { name: "BISHAL", old: 1300, new: 1500 },
+                { name: "SUBOJ MURMU", old: 550, new: 800 },
+                { name: "MD GAFER", old: 900, new: 1100 },
+                { name: "SAHIL ANSARI", old: 600, new: 700 },
+                { name: "BIJAY DAS", old: 600, new: 700 },
+                { name: "SOURAV DAS", old: 700, new: 800 },
+                { name: "MANSOOR", old: 1200, new: 1300 },
+                { name: "AZAAM", old: 550, new: 650 }
+            ];
+
+            const hikesContainer = document.getElementById('salary-hikes-container');
+            if (hikesContainer) {
+                hikesContainer.innerHTML = salaryHikesData.map(hike => {
+                    const isSame = hike.old === hike.new;
+                    const iconHTML = isSame 
+                        ? '<i data-lucide="minus" class="w-3 h-3 text-gray-500"></i>'
+                        : '<i data-lucide="arrow-right" class="w-3 h-3 text-green-400"></i>';
+                    const newColor = isSame ? 'text-gray-400' : 'text-green-400';
+                    
+                    return `
+                        <div class="bg-black/20 p-3 rounded-lg border border-white/5 flex justify-between items-center">
+                            <span class="text-white font-medium text-sm">${hike.name.toUpperCase()}</span>
+                            <div class="flex items-center gap-2 text-xs font-bold">
+                                <span class="text-gray-400">${hike.old}</span>
+                                ${iconHTML}
+                                <span class="${newColor}">${hike.new}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                // Re-initialize lucide icons for newly injected HTML
+                lucide.createIcons();
+            }
+
+            // Initialize Attrition Trend Chart (Tab 3)
+            const ctx = document.getElementById('attritionChart').getContext('2d');
             let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(249, 115, 22, 0.8)'); // Tailwind brand-500 equivalent, slightly opaque
+            gradient.addColorStop(0, 'rgba(249, 115, 22, 0.8)'); 
             gradient.addColorStop(1, 'rgba(249, 115, 22, 0.2)');
 
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["May '25", "Jun '25", "Jul '25", "Aug '25", "Sep '25", "Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26"],
+                    labels: ["Jun '25", "Jul '25", "Aug '25", "Sep '25", "Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26", "Apr '26"],
                     datasets: [{
                         label: 'Attrition Rate (%)',
-                        data: [22.10, 17.10, 12.00, 11.20, 31.40, 20.80, 19.87, 20.46, 19.33, 13.77, 34.69],
+                        data: [17.10, 12.00, 11.20, 31.40, 20.80, 19.87, 20.46, 19.33, 13.77, 34.69, 57.76],
                         backgroundColor: gradient,
                         borderColor: '#ea580c',
                         borderWidth: 1,
-                        borderRadius: 4, // Added rounded corners to the top of the bars
+                        borderRadius: 4, 
                         hoverBackgroundColor: '#f97316'
                     }]
                 },
