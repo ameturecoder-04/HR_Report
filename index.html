@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Monthly Report - May 2026 | Pathirakozhi</title>
+    <title>HR Monthly Report - June 2026 | Pathirakozhi</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -109,11 +113,14 @@
 </head>
 <body class="bg-dark-bg text-gray-300 font-sans h-screen flex overflow-hidden selection:bg-brand-500 selection:text-white">
 
+    <!-- Sidebar -->
     <aside class="w-64 bg-dark-panel border-r border-dark-border flex flex-col flex-shrink-0 z-20">
+        <!-- Logo Area -->
         <div class="p-4 border-b border-dark-border flex items-center justify-center">
             <img src="IMG/Logo2.png" alt="Pathira Kozhi Logo" onerror="this.src='https://placehold.co/400x200/181b21/a1a1aa?text=Logo'" class="h-28 w-auto object-contain drop-shadow-md">
         </div>
 
+        <!-- Navigation Tabs -->
         <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
             <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Reports & Analytics</p>
             
@@ -141,17 +148,21 @@
         </nav>
     </aside>
 
+    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
         
+        <!-- Header -->
         <header class="h-20 bg-dark-panel/80 backdrop-blur-md border-b border-dark-border flex items-center px-8 sticky top-0 z-10">
             <div>
-                <h1 class="text-2xl font-bold text-white tracking-tight">HR Monthly Report <span class="text-brand-500">- May</span></h1>
+                <h1 class="text-2xl font-bold text-white tracking-tight">HR Monthly Report <span class="text-brand-500">- June</span></h1>
                 <p class="text-sm text-gray-400 mt-0.5">Global BBQ Fusion Overview & Analytics</p>
             </div>
         </header>
 
+        <!-- Scrollable Tab Content Wrapper -->
         <div class="flex-1 overflow-y-auto p-8 relative">
             
+            <!-- ===================== TAB 0: EXECUTIVE SUMMARY ===================== -->
             <div id="tab-0" class="tab-content">
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold text-white">Executive Summary</h2>
@@ -159,6 +170,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- HRMS System Approval -->
                     <div class="bg-dark-panel p-8 rounded-xl border border-brand-500/40 hover:border-brand-500 transition-colors flex flex-col relative overflow-hidden group shadow-xl h-64">
                         <div class="absolute -right-6 -top-6 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl group-hover:bg-brand-500/20 transition-all duration-500"></div>
                         <div class="flex items-center gap-4 mb-6 pb-4 border-b border-dark-border relative z-10">
@@ -177,12 +189,14 @@
                 </div>
             </div>
 
+            <!-- ===================== TAB 1: CALENDARS ===================== -->
             <div id="tab-1" class="tab-content hidden">
                 <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
                         <h2 class="text-xl font-semibold text-white">Company Calendars</h2>
-                        <p class="text-sm text-gray-400">May 2026 Master view: Leaves, Visits, and Events.</p>
+                        <p class="text-sm text-gray-400">June 2026 Master view: Leaves, Visits, and Events.</p>
                     </div>
+                    <!-- Sub-Navigation Tabs -->
                     <div class="flex flex-wrap gap-2 bg-dark-panel p-1.5 rounded-xl border border-dark-border w-fit">
                         <button onclick="switchSubTab('core-leaves')" id="sub-tab-btn-core-leaves" class="sub-tab-btn px-4 py-2 text-sm font-semibold rounded-lg bg-brand-500 text-white shadow-sm transition-all">Core Leaves</button>
                         <button onclick="switchSubTab('manager-leaves')" id="sub-tab-btn-manager-leaves" class="sub-tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-dark-border border border-transparent transition-all">Manager Leaves</button>
@@ -191,6 +205,7 @@
                     </div>
                 </div>
 
+                <!-- 1. Core Team Leave Calendar -->
                 <div id="core-leaves" class="sub-tab-content block bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="crown" class="w-5 h-5 text-brand-500"></i> Core Team Leaves</h3>
@@ -216,6 +231,7 @@
                     </div></div>
                 </div>
 
+                <!-- 2. Managers Leave Calendar -->
                 <div id="manager-leaves" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Managers Leaves</h3>
@@ -241,6 +257,7 @@
                     </div></div>
                 </div>
 
+                <!-- 3. Outlet Visits Calendar -->
                 <div id="outlet-visits" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="map" class="w-5 h-5 text-fuchsia-500"></i> Core Team Outlet Visits</h3>
@@ -259,7 +276,6 @@
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span><span class="font-medium text-gray-400">HR</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">FM</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">PM</span></div>
-                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span><span class="font-medium text-gray-400">Chef</span></div>
                     </div>
 
                     <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
@@ -270,6 +286,7 @@
                     </div></div>
                 </div>
 
+                <!-- 4. Events Calendar -->
                 <div id="events" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="calendar-range" class="w-5 h-5 text-emerald-500"></i> Company Event Calendar</h3>
@@ -295,12 +312,15 @@
 
             </div>
 
+            <!-- ===================== TAB 2: HIERARCHY ===================== -->
+            <!-- Hierarchy Tab logic and content remains intact as previously defined -->
             <div id="tab-2" class="tab-content hidden flex flex-col h-full">
                  <div class="mb-4 flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div>
                         <h2 class="text-xl font-semibold text-white">Organizational Hierarchy</h2>
                         <p class="text-sm text-gray-400 mb-4">Structural flow charts across 8 distinct organizational branches.</p>
                         
+                        <!-- 8 Slide Navigation Buttons -->
                         <div class="flex flex-wrap gap-2 bg-dark-panel p-2 border border-dark-border rounded-xl w-fit">
                             <button onclick="showOrgSlide(1)" id="btn-org-1" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg bg-brand-500 text-white shadow-lg shadow-brand-500/20 transition-colors">Aluva F&B</button>
                             <button onclick="showOrgSlide(2)" id="btn-org-2" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Aluva Kitchen</button>
@@ -314,10 +334,13 @@
                     </div>
                 </div>
 
+                <!-- Presentation Area -->
                 <div class="org-presentation relative flex-1 min-h-[600px] bg-dark-bg/80 rounded-xl border border-dark-border overflow-hidden flex justify-center items-center">
                     
+                    <!-- Watermark -->
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-5 pointer-events-none z-0 mix-blend-screen bg-center bg-no-repeat bg-contain" style="background-image: url('IMG/Logo2.png');"></div>
 
+                    <!-- SLIDE 1: Aluva F&B -->
                     <div id="slide1" class="org-slide active">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -366,6 +389,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 2: Aluva Kitchen -->
                     <div id="slide2" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -424,6 +448,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 3: Edachira F&B -->
                     <div id="slide3" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -458,6 +483,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 4: Edachira Kitchen -->
                     <div id="slide4" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -485,6 +511,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 5: Kakkanad -->
                     <div id="slide5" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -515,6 +542,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 6: Kalamassery F&B -->
                     <div id="slide6" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -558,6 +586,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 7: Kalamassery Kitchen -->
                     <div id="slide7" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -609,6 +638,7 @@
                         </div>
                     </div>
 
+                    <!-- SLIDE 8: Scroll -->
                     <div id="slide8" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -644,6 +674,7 @@
                 </div>
             </div>
 
+            <!-- ===================== TAB 3: MANPOWER & COSTS ===================== -->
             <div id="tab-3" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-end">
                     <div>
@@ -652,13 +683,16 @@
                     </div>
                 </div>
 
+                <!-- Glassmorphism Metric Bar -->
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <!-- Starting Count -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="users" class="w-12 h-12"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">Starting Count</p>
                         <h3 class="text-3xl font-bold text-white">139</h3>
                     </div>
 
+                    <!-- New Joiners -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-plus" class="w-12 h-12 text-green-400"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">New Joiners</p>
@@ -668,12 +702,14 @@
                         </div>
                     </div>
 
+                    <!-- Resigned -->
                     <div class="bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-minus" class="w-12 h-12 text-red-500"></i></div>
                         <p class="text-red-200 text-sm font-medium mb-1">Resigned</p>
                         <h3 class="text-3xl font-bold text-red-400">66</h3>
                     </div>
 
+                    <!-- Closing Count -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="calculator" class="w-12 h-12 text-brand-400"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">Closing Count</p>
@@ -681,9 +717,12 @@
                     </div>
                 </div>
 
+                <!-- Attrition Highlight & Visualization Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     
+                    <!-- Attrition Rate Highlight -->
                     <div class="bg-gradient-to-br from-red-900/60 to-orange-900/40 backdrop-blur-lg border border-red-500/40 rounded-xl p-8 flex flex-col justify-center relative overflow-hidden shadow-2xl">
+                        <!-- Background glow effect -->
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-500/20 blur-3xl rounded-full"></div>
                         
                         <h3 class="text-red-200 font-medium text-lg mb-2">Attrition Rate</h3>
@@ -694,12 +733,14 @@
                             </h1>
                         </div>
                         
+                        <!-- Warning Sub-text -->
                         <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 rounded-lg w-fit mb-6">
                             <i data-lucide="alert-triangle" class="w-4 h-4 text-red-400"></i>
                             <span class="text-red-200 text-sm font-semibold tracking-wide uppercase">Highest till date</span>
                         </div>
                     </div>
 
+                    <!-- Exit Breakdown Chart -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8 flex flex-col shadow-xl">
                         <h3 class="text-white font-medium text-lg mb-6 flex items-center gap-2">
                             <i data-lucide="bar-chart-horizontal" class="w-5 h-5 text-gray-400"></i>
@@ -707,6 +748,7 @@
                         </h3>
                         
                         <div class="flex-1 flex flex-col justify-center gap-6">
+                            <!-- Resigned -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Resigned</span>
@@ -717,6 +759,7 @@
                                 </div>
                             </div>
 
+                            <!-- Absconding -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Absconding</span>
@@ -727,6 +770,7 @@
                                 </div>
                             </div>
 
+                            <!-- Termination -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Termination</span>
@@ -745,6 +789,7 @@
                     </div>
                 </div>
 
+                <!-- Historical Attrition Trend Chart -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6 shadow-xl w-full">
                     <h3 class="text-white font-medium text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="line-chart" class="w-5 h-5 text-brand-400"></i>
@@ -755,6 +800,7 @@
                     </div>
                 </div>
 
+                <!-- Labour Cost Data -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8 flex flex-col shadow-xl w-full">
                     <h3 class="text-white font-medium text-lg mb-6 flex items-center gap-2">
                         <i data-lucide="wallet" class="w-5 h-5 text-brand-400"></i>
@@ -762,6 +808,7 @@
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Edachira -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Edachira</span>
@@ -772,6 +819,7 @@
                             </div>
                         </div>
 
+                        <!-- Aluva -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Aluva</span>
@@ -782,6 +830,7 @@
                             </div>
                         </div>
 
+                        <!-- Kalamassery -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Kalamassery</span>
@@ -792,6 +841,7 @@
                             </div>
                         </div>
 
+                        <!-- Kakkanad -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Kakkanad</span>
@@ -802,6 +852,7 @@
                             </div>
                         </div>
 
+                        <!-- Scroll -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Scroll</span>
@@ -815,6 +866,7 @@
                 </div>
             </div>
 
+            <!-- ===================== TAB 4: RECRUITMENT ===================== -->
             <div id="tab-4" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -823,8 +875,10 @@
                     </div>
                 </div>
 
+                <!-- Side-by-Side Tables -->
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
                     
+                    <!-- Last Month Open Positions -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col">
                         <div class="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
                             <h3 class="text-lg font-medium text-white flex items-center gap-2">
@@ -858,7 +912,9 @@
                         </div>
                     </div>
 
+                    <!-- Current Month Open Positions -->
                     <div class="bg-white/5 backdrop-blur-lg border border-brand-500/30 rounded-xl p-6 shadow-2xl relative flex flex-col">
+                        <!-- Glow effect behind current month -->
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-500/10 blur-3xl rounded-full pointer-events-none"></div>
                         
                         <div class="flex items-center justify-between mb-4 pb-4 border-b border-white/10 relative z-10">
@@ -891,6 +947,7 @@
                     </div>
                 </div>
 
+                <!-- Recruitment Expenditure -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl w-full mt-6">
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
                         <div class="flex items-center gap-3">
@@ -936,6 +993,7 @@
 
             </div>
 
+            <!-- ===================== TAB 5: COMPLIANCE ===================== -->
             <div id="tab-5" class="tab-content hidden">
                  <div class="mb-6">
                     <h2 class="text-xl font-semibold text-white">Compliance</h2>
@@ -943,6 +1001,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Fine Report -->
                     <div class="lg:col-span-2 bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                             <div class="p-2 bg-red-500/20 rounded-lg border border-red-500/30">
@@ -988,7 +1047,9 @@
                         </div>
                     </div>
 
+                    <!-- Right Column Wrapper -->
                     <div class="flex flex-col gap-6">
+                        <!-- Hike Summary -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-emerald-500/20 rounded-lg border border-emerald-500/30">
@@ -1019,6 +1080,7 @@
                             </div>
                         </div>
 
+                        <!-- Policy Updates -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-blue-500/20 rounded-lg border border-blue-500/30">
@@ -1045,6 +1107,7 @@
                             </div>
                         </div>
 
+                        <!-- Salary Hikes -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-green-500/20 rounded-lg border border-green-500/30">
@@ -1057,12 +1120,14 @@
                             </div>
                             
                             <div id="salary-hikes-container" class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar-hide">
-                                </div>
+                                <!-- Dynamic content will be injected here -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ===================== TAB 6: OUTLET REPORTS ===================== -->
             <div id="tab-6" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -1104,6 +1169,7 @@
         </div>
     </main>
 
+    <!-- Tab Switching Logic & Icon Initialization -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
@@ -1325,11 +1391,9 @@
             
             let html = '';
 
-
-
-            const daysInMonth = 31; // May has 31 days
-            const startingDayOfWeek = 4; // May 1st, 2026 is a Friday (Monday=0, so Friday=4)
-            const prevMonthDays = 30; // April has 30 days
+            const daysInMonth = 30; // June has 30 days
+            const startingDayOfWeek = 1; // June 1st, 2026 is a Monday (Monday=1)
+            const prevMonthDays = 31; // May has 31 days
             
             // Previous month cells
             for (let i = 0; i < startingDayOfWeek; i++) {
@@ -1380,7 +1444,6 @@
             connect('slide1', 's1-rm', ['s1-fbm']);
             connect('slide1', 's1-fbm', ['s1-arm']);
             connect('slide1', 's1-arm', ['s1-gre', 's1-cash1', 's1-cash2', 's1-cap1', 's1-cap2', 's1-cap3', 's1-cap4', 's1-cap5', 's1-cap6']);
-            // Corrected connections for s1-bs1
             connect('slide1', 's1-gre', ['s1-bs1']);
             connect('slide1', 's1-cash1', ['s1-bs1']);
             connect('slide1', 's1-cash2', ['s1-bs1']);
@@ -1391,7 +1454,6 @@
             connect('slide1', 's1-cap5', ['s1-bs1']);
             connect('slide1', 's1-cap6', ['s1-bs1']);
             connect('slide1', 's1-bs1', ['s1-w1', 's1-w2', 's1-w3', 's1-w4', 's1-w5']);
-            // Corrected connections for s1-bs2
             connect('slide1', 's1-w1', ['s1-bs2']);
             connect('slide1', 's1-w2', ['s1-bs2']);
             connect('slide1', 's1-w3', ['s1-bs2']);
@@ -1410,7 +1472,6 @@
             connect('slide2', 's2-ju-hd', ['s2-ju-h1']);
             connect('slide2', 's2-sw-hd', ['s2-sw-h1']);
             connect('slide2', 's2-pa-hd', ['s2-pa-h1']);
-            // Corrected connections for s2-bs1
             connect('slide2', 's2-ch-h1', ['s2-bs1']);
             connect('slide2', 's2-ch-h2', ['s2-bs1']);
             connect('slide2', 's2-ch-h3', ['s2-bs1']);
@@ -1426,13 +1487,11 @@
             connect('slide3', 's3-root', ['s3-rm']);
             connect('slide3', 's3-rm', ['s3-fbm']);
             connect('slide3', 's3-fbm', ['s3-cap1', 's3-cap2', 's3-cash', 's3-cashcap']);
-            // Corrected connections for s3-bs1
             connect('slide3', 's3-cap1', ['s3-bs1']);
             connect('slide3', 's3-cap2', ['s3-bs1']);
             connect('slide3', 's3-cash', ['s3-bs1']);
             connect('slide3', 's3-cashcap', ['s3-bs1']);
             connect('slide3', 's3-bs1', ['s3-w1', 's3-w2', 's3-del']);
-            // Corrected connections for s3-bs2
             connect('slide3', 's3-w1', ['s3-bs2']);
             connect('slide3', 's3-w2', ['s3-bs2']);
             connect('slide3', 's3-del', ['s3-bs2']);
@@ -1442,7 +1501,6 @@
             connect('slide4', 's4-root', ['s4-rm']);
             connect('slide4', 's4-rm', ['s4-hc']);
             connect('slide4', 's4-hc', ['s4-swms', 's4-jums', 's4-rice', 's4-pan', 's4-al2']);
-            // Corrected connections for s4-bs1
             connect('slide4', 's4-swms', ['s4-bs1']);
             connect('slide4', 's4-jums', ['s4-bs1']);
             connect('slide4', 's4-rice', ['s4-bs1']);
@@ -1461,15 +1519,12 @@
             connect('slide6', 's6-fbm', ['s6-srcap']);
             connect('slide6', 's6-srcap', ['s6-bs1']);
             connect('slide6', 's6-bs1', ['s6-del', 's6-gre', 's6-cash', 's6-cashcap', 's6-cap']);
-            // Corrected connections for s6-bs2
             connect('slide6', 's6-del', ['s6-bs2']);
             connect('slide6', 's6-gre', ['s6-bs2']);
-
             connect('slide6', 's6-cash', ['s6-bs2']);
             connect('slide6', 's6-cashcap', ['s6-bs2']);
             connect('slide6', 's6-cap', ['s6-bs2']);
             connect('slide6', 's6-bs2', ['s6-w1', 's6-w2', 's6-w3', 's6-wpt1', 's6-wpt2']);
-            // Corrected connections for s6-bs3
             connect('slide6', 's6-w1', ['s6-bs3']);
             connect('slide6', 's6-w2', ['s6-bs3']);
             connect('slide6', 's6-w3', ['s6-bs3']);
@@ -1485,7 +1540,6 @@
             connect('slide7', 's7-al-hd', ['s7-al-h1']);
             connect('slide7', 's7-sw-hd', ['s7-sw-h1']);
             connect('slide7', 's7-pa-hd', ['s7-r1', 's7-r2']);
-            // Corrected connections for s7-bs2
             connect('slide7', 's7-al-h1', ['s7-bs2']);
             connect('slide7', 's7-ju-hd', ['s7-bs2']);
             connect('slide7', 's7-sw-h1', ['s7-bs2']);
@@ -1501,10 +1555,8 @@
             connect('slide8', 's8-rm', ['s8-cash']);
             connect('slide8', 's8-cash', ['s8-bs1']);
             connect('slide8', 's8-bs1', ['s8-al', 's8-sw', 's8-del']);
-            // Corrected connections for s8-bs2
             connect('slide8', 's8-al', ['s8-bs2']);
-
-            connect('slide8', 's8-sw', ['s8-bs2']); // Shawaya master should also connect to this junction
+            connect('slide8', 's8-sw', ['s8-bs2']);
             connect('slide8', 's8-bs2', ['s8-rice', 's8-pan', 's8-sal']);
         }
 
@@ -1608,11 +1660,11 @@
             window.addEventListener('resize', fitOrgToScreen);
 
             // ============================================
-            // 1. Core Team Leaves Data & Rendering
+            // 1. Core Team Leaves Data & Rendering (JUNE DATA)
             // ============================================
             const coreLeaveData = {
-                BDM: [13, 10, 11, 12],
-                Chef: [7, 20, 26],
+                BDM: [9, 10, 11, 12],
+                Chef: [8, 9, 20, 26],
                 GM: [7, 14, 21, 28],
                 HR: [4, 7, 13, 14, 15, 21, 28], 
                 FM: [7, 14, 21, 28],
@@ -1648,7 +1700,7 @@
             });
 
             // ============================================
-            // 2. Managers Leaves Data & Rendering
+            // 2. Managers Leaves Data & Rendering (JUNE DATA)
             // ============================================
             const managerLeaveData = {
                 John: [2, 3, 4],
@@ -1688,14 +1740,13 @@
             });
 
             // ============================================
-            // 3. Outlet Visits Data & Rendering
+            // 3. Outlet Visits Data & Rendering (JUNE DATA)
             // ============================================
             const visitData = {
                 BDM: { 3: 'EDA', 10: 'KKD', 17: 'KLY', 24: 'ALV' },
-                HR: { 10: 'Aluva', 17: 'Kalamassery', 24: 'Edachira', 25: 'Kakkanad & Scroll' },
-                PM: { 6: 'All Outlets', 13: 'All Outlets', 20: 'All Outlets', 27: 'All Outlets' },
-                Chef: { 4: 'All Outlets' },
-                FM: { 15: 'Aluva, Kalamassery', 22: 'Seaport, Infopark', 24: 'Scroll' }
+                HR: { 11: 'Edachira', 13: 'KKD', 18: 'KLY', 20: 'Aluva' },
+                FM: { 13: 'Alv, Kly', 21: 'Info, KKD' },
+                PM: { 3: 'All Outlets' }
             };
             const visitStyles = {
                 BDM: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
@@ -1726,11 +1777,11 @@
             });
 
             // ============================================
-            // 4. Events Data & Rendering
+            // 4. Events Data & Rendering (JUNE DATA)
             // ============================================
             const eventData = {
                 1: [{ type: 'core', title: 'Anniversary celebration' }],
-                5: [{ type: 'core', title: 'Scroll inauguration' }],
+                5: [{ type: 'core', title: 'Scroll inaugiration' }],
                 8: [{ type: 'core', title: 'Core team meeting' }],
                 9: [{ type: 'training', title: 'O.J.T kalamassery' }],
                 10: [{ type: 'managers', title: 'Managers meeting & Audit' }],
