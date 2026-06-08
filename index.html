@@ -1324,9 +1324,12 @@
             if (!grid) return;
             
             let html = '';
-            const daysInMonth = 30; // June has 30 days
-            const startingDayOfWeek = 1; // Monday (June 1st, 2026 is a Monday)
-            const prevMonthDays = 31; // May has 31 days
+
+
+
+            const daysInMonth = 31; // May has 31 days
+            const startingDayOfWeek = 4; // May 1st, 2026 is a Friday (Monday=0, so Friday=4)
+            const prevMonthDays = 30; // April has 30 days
             
             // Previous month cells
             for (let i = 0; i < startingDayOfWeek; i++) {
@@ -1377,6 +1380,10 @@
             connect('slide1', 's1-rm', ['s1-fbm']);
             connect('slide1', 's1-fbm', ['s1-arm']);
             connect('slide1', 's1-arm', ['s1-gre', 's1-cash1', 's1-cash2', 's1-cap1', 's1-cap2', 's1-cap3', 's1-cap4', 's1-cap5', 's1-cap6']);
+            // Corrected connections for s1-bs1
+            connect('slide1', 's1-gre', ['s1-bs1']);
+            connect('slide1', 's1-cash1', ['s1-bs1']);
+            connect('slide1', 's1-cash2', ['s1-bs1']);
             connect('slide1', 's1-cap1', ['s1-bs1']);
             connect('slide1', 's1-cap2', ['s1-bs1']);
             connect('slide1', 's1-cap3', ['s1-bs1']);
@@ -1384,6 +1391,7 @@
             connect('slide1', 's1-cap5', ['s1-bs1']);
             connect('slide1', 's1-cap6', ['s1-bs1']);
             connect('slide1', 's1-bs1', ['s1-w1', 's1-w2', 's1-w3', 's1-w4', 's1-w5']);
+            // Corrected connections for s1-bs2
             connect('slide1', 's1-w1', ['s1-bs2']);
             connect('slide1', 's1-w2', ['s1-bs2']);
             connect('slide1', 's1-w3', ['s1-bs2']);
@@ -1402,6 +1410,7 @@
             connect('slide2', 's2-ju-hd', ['s2-ju-h1']);
             connect('slide2', 's2-sw-hd', ['s2-sw-h1']);
             connect('slide2', 's2-pa-hd', ['s2-pa-h1']);
+            // Corrected connections for s2-bs1
             connect('slide2', 's2-ch-h1', ['s2-bs1']);
             connect('slide2', 's2-ch-h2', ['s2-bs1']);
             connect('slide2', 's2-ch-h3', ['s2-bs1']);
@@ -1417,11 +1426,13 @@
             connect('slide3', 's3-root', ['s3-rm']);
             connect('slide3', 's3-rm', ['s3-fbm']);
             connect('slide3', 's3-fbm', ['s3-cap1', 's3-cap2', 's3-cash', 's3-cashcap']);
+            // Corrected connections for s3-bs1
             connect('slide3', 's3-cap1', ['s3-bs1']);
             connect('slide3', 's3-cap2', ['s3-bs1']);
             connect('slide3', 's3-cash', ['s3-bs1']);
             connect('slide3', 's3-cashcap', ['s3-bs1']);
             connect('slide3', 's3-bs1', ['s3-w1', 's3-w2', 's3-del']);
+            // Corrected connections for s3-bs2
             connect('slide3', 's3-w1', ['s3-bs2']);
             connect('slide3', 's3-w2', ['s3-bs2']);
             connect('slide3', 's3-del', ['s3-bs2']);
@@ -1431,6 +1442,7 @@
             connect('slide4', 's4-root', ['s4-rm']);
             connect('slide4', 's4-rm', ['s4-hc']);
             connect('slide4', 's4-hc', ['s4-swms', 's4-jums', 's4-rice', 's4-pan', 's4-al2']);
+            // Corrected connections for s4-bs1
             connect('slide4', 's4-swms', ['s4-bs1']);
             connect('slide4', 's4-jums', ['s4-bs1']);
             connect('slide4', 's4-rice', ['s4-bs1']);
@@ -1449,12 +1461,15 @@
             connect('slide6', 's6-fbm', ['s6-srcap']);
             connect('slide6', 's6-srcap', ['s6-bs1']);
             connect('slide6', 's6-bs1', ['s6-del', 's6-gre', 's6-cash', 's6-cashcap', 's6-cap']);
+            // Corrected connections for s6-bs2
             connect('slide6', 's6-del', ['s6-bs2']);
             connect('slide6', 's6-gre', ['s6-bs2']);
-            connect('slide6', 's6-cash', ['s6-cashcap', 's6-bs2']);
+
+            connect('slide6', 's6-cash', ['s6-bs2']);
             connect('slide6', 's6-cashcap', ['s6-bs2']);
             connect('slide6', 's6-cap', ['s6-bs2']);
             connect('slide6', 's6-bs2', ['s6-w1', 's6-w2', 's6-w3', 's6-wpt1', 's6-wpt2']);
+            // Corrected connections for s6-bs3
             connect('slide6', 's6-w1', ['s6-bs3']);
             connect('slide6', 's6-w2', ['s6-bs3']);
             connect('slide6', 's6-w3', ['s6-bs3']);
@@ -1470,6 +1485,7 @@
             connect('slide7', 's7-al-hd', ['s7-al-h1']);
             connect('slide7', 's7-sw-hd', ['s7-sw-h1']);
             connect('slide7', 's7-pa-hd', ['s7-r1', 's7-r2']);
+            // Corrected connections for s7-bs2
             connect('slide7', 's7-al-h1', ['s7-bs2']);
             connect('slide7', 's7-ju-hd', ['s7-bs2']);
             connect('slide7', 's7-sw-h1', ['s7-bs2']);
@@ -1485,8 +1501,10 @@
             connect('slide8', 's8-rm', ['s8-cash']);
             connect('slide8', 's8-cash', ['s8-bs1']);
             connect('slide8', 's8-bs1', ['s8-al', 's8-sw', 's8-del']);
+            // Corrected connections for s8-bs2
             connect('slide8', 's8-al', ['s8-bs2']);
-            connect('slide8', 's8-sw', ['s8-bs2']); // Connect Shawaya Master to junction
+
+            connect('slide8', 's8-sw', ['s8-bs2']); // Shawaya master should also connect to this junction
             connect('slide8', 's8-bs2', ['s8-rice', 's8-pan', 's8-sal']);
         }
 
@@ -1593,8 +1611,8 @@
             // 1. Core Team Leaves Data & Rendering
             // ============================================
             const coreLeaveData = {
-                BDM: [9, 10, 11, 12],
-                Chef: [8, 9, 20, 26],
+                BDM: [13, 10, 11, 12],
+                Chef: [7, 20, 26],
                 GM: [7, 14, 21, 28],
                 HR: [4, 7, 13, 14, 15, 21, 28], 
                 FM: [7, 14, 21, 28],
