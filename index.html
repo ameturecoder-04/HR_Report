@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Monthly Report - April 2026 | Pathirakozhi</title>
-    <!-- Tailwind CSS -->
+    <title>HR Monthly Report - May 2026 | Pathirakozhi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -113,76 +109,49 @@
 </head>
 <body class="bg-dark-bg text-gray-300 font-sans h-screen flex overflow-hidden selection:bg-brand-500 selection:text-white">
 
-    <!-- Sidebar -->
     <aside class="w-64 bg-dark-panel border-r border-dark-border flex flex-col flex-shrink-0 z-20">
-        <!-- Logo Area -->
         <div class="p-4 border-b border-dark-border flex items-center justify-center">
             <img src="IMG/Logo2.png" alt="Pathira Kozhi Logo" onerror="this.src='https://placehold.co/400x200/181b21/a1a1aa?text=Logo'" class="h-28 w-auto object-contain drop-shadow-md">
         </div>
 
-        <!-- Navigation Tabs -->
         <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
             <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Reports & Analytics</p>
             
-            <!-- Tab 1 -->
             <button data-tab="tab-1" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="calendar-days" class="w-5 h-5"></i>
-                Calendars
+                <i data-lucide="calendar-days" class="w-5 h-5"></i> Calendars
             </button>
-
-            <!-- Tab 2 -->
             <button data-tab="tab-2" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="network" class="w-5 h-5"></i>
-                Hierarchy
+                <i data-lucide="network" class="w-5 h-5"></i> Hierarchy
             </button>
-
-            <!-- Tab 3 -->
             <button data-tab="tab-3" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="users" class="w-5 h-5"></i>
-                Manpower & Costs
+                <i data-lucide="users" class="w-5 h-5"></i> Manpower & Costs
             </button>
-
-            <!-- Tab 4 -->
             <button data-tab="tab-4" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="target" class="w-5 h-5"></i>
-                Recruitment
+                <i data-lucide="target" class="w-5 h-5"></i> Recruitment
             </button>
-
-            <!-- Tab 5 -->
             <button data-tab="tab-5" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="shield-check" class="w-5 h-5"></i>
-                Compliance
+                <i data-lucide="shield-check" class="w-5 h-5"></i> Compliance
             </button>
-
-            <!-- Tab 6 -->
             <button data-tab="tab-6" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="store" class="w-5 h-5"></i>
-                Outlet Reports
+                <i data-lucide="store" class="w-5 h-5"></i> Outlet Reports
             </button>
-
-            <!-- Tab 0 (Executive Summary) -->
             <button data-tab="tab-0" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border-l-4 border-transparent text-gray-400 hover:bg-dark-border hover:text-white">
-                <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                Executive Summary
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Executive Summary
             </button>
         </nav>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
         
-        <!-- Header -->
         <header class="h-20 bg-dark-panel/80 backdrop-blur-md border-b border-dark-border flex items-center px-8 sticky top-0 z-10">
             <div>
-                <h1 class="text-2xl font-bold text-white tracking-tight">HR Monthly Report <span class="text-brand-500">- April</span></h1>
+                <h1 class="text-2xl font-bold text-white tracking-tight">HR Monthly Report <span class="text-brand-500">- May</span></h1>
                 <p class="text-sm text-gray-400 mt-0.5">Global BBQ Fusion Overview & Analytics</p>
             </div>
         </header>
 
-        <!-- Scrollable Tab Content Wrapper -->
         <div class="flex-1 overflow-y-auto p-8 relative">
             
-            <!-- ===================== TAB 0: EXECUTIVE SUMMARY ===================== -->
             <div id="tab-0" class="tab-content">
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold text-white">Executive Summary</h2>
@@ -190,56 +159,30 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    <!-- HRMS System Approval -->
                     <div class="bg-dark-panel p-8 rounded-xl border border-brand-500/40 hover:border-brand-500 transition-colors flex flex-col relative overflow-hidden group shadow-xl h-64">
                         <div class="absolute -right-6 -top-6 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl group-hover:bg-brand-500/20 transition-all duration-500"></div>
-                        
                         <div class="flex items-center gap-4 mb-6 pb-4 border-b border-dark-border relative z-10">
                             <div class="p-3 bg-brand-500/20 rounded-xl border border-brand-500/30">
                                 <i data-lucide="check-square" class="w-8 h-8 text-brand-400"></i>
                             </div>
                             <div>
-                                <h3 class="text-2xl font-bold text-white">HRMS Payment Approval</h3>
+                                <h3 class="text-2xl font-bold text-white">HRMS Final Payment Approval</h3>
                                 <p class="text-xs text-brand-300/80 mt-1 uppercase tracking-wider font-semibold">Pending Action</p>
                             </div>
                         </div>
-                        
                         <div class="flex-1 flex flex-col justify-between relative z-10">
-                            <p class="text-gray-400 text-sm leading-relaxed">Final sign-off and payment approval required for the deployment and rollout of the new Human Resource Management System.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed">Final payment and sign-off required for the deployment of the new Human Resource Management System, scheduled for June 15th.</p>
                         </div>
                     </div>
-
-                    <!-- ESI Registration Approval -->
-                    <div class="bg-dark-panel p-8 rounded-xl border border-blue-500/40 hover:border-blue-500 transition-colors flex flex-col relative overflow-hidden group shadow-xl h-64">
-                        <div class="absolute -right-6 -top-6 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all duration-500"></div>
-                        
-                        <div class="flex items-center gap-4 mb-6 pb-4 border-b border-dark-border relative z-10">
-                            <div class="p-3 bg-blue-500/20 rounded-xl border border-blue-500/30">
-                                <i data-lucide="clipboard-list" class="w-8 h-8 text-blue-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-white">ESI New Registration</h3>
-                                <p class="text-xs text-blue-300/80 mt-1 uppercase tracking-wider font-semibold">Pending Approval</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-1 flex flex-col justify-between relative z-10">
-                            <p class="text-gray-400 text-sm leading-relaxed">Review and approval required for the newly generated list of Employee State Insurance (ESI) registrations.</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
-            <!-- ===================== TAB 1: CALENDARS ===================== -->
             <div id="tab-1" class="tab-content hidden">
                 <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
                         <h2 class="text-xl font-semibold text-white">Company Calendars</h2>
                         <p class="text-sm text-gray-400">May 2026 Master view: Leaves, Visits, and Events.</p>
                     </div>
-                    <!-- Sub-Navigation Tabs -->
                     <div class="flex flex-wrap gap-2 bg-dark-panel p-1.5 rounded-xl border border-dark-border w-fit">
                         <button onclick="switchSubTab('core-leaves')" id="sub-tab-btn-core-leaves" class="sub-tab-btn px-4 py-2 text-sm font-semibold rounded-lg bg-brand-500 text-white shadow-sm transition-all">Core Leaves</button>
                         <button onclick="switchSubTab('manager-leaves')" id="sub-tab-btn-manager-leaves" class="sub-tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-dark-border border border-transparent transition-all">Manager Leaves</button>
@@ -248,7 +191,6 @@
                     </div>
                 </div>
 
-                <!-- 1. Core Team Leave Calendar -->
                 <div id="core-leaves" class="sub-tab-content block bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="crown" class="w-5 h-5 text-brand-500"></i> Core Team Leaves</h3>
@@ -274,7 +216,6 @@
                     </div></div>
                 </div>
 
-                <!-- 2. Managers Leave Calendar -->
                 <div id="manager-leaves" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Managers Leaves</h3>
@@ -286,9 +227,10 @@
                     <div class="p-4 border-b border-dark-border flex flex-wrap gap-4 justify-center text-xs">
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">John</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">Shameer</span></div>
-                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">Gerald</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-400"></span><span class="font-medium text-gray-400">Nithin</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span><span class="font-medium text-gray-400">Jackson</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span><span class="font-medium text-gray-400">Vipin</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span><span class="font-medium text-gray-400">Jithesh</span></div>
                     </div>
 
                     <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
@@ -299,7 +241,6 @@
                     </div></div>
                 </div>
 
-                <!-- 3. Outlet Visits Calendar -->
                 <div id="outlet-visits" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="map" class="w-5 h-5 text-fuchsia-500"></i> Core Team Outlet Visits</h3>
@@ -318,6 +259,7 @@
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span><span class="font-medium text-gray-400">HR</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span><span class="font-medium text-gray-400">FM</span></div>
                         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span><span class="font-medium text-gray-400">PM</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span><span class="font-medium text-gray-400">Chef</span></div>
                     </div>
 
                     <div class="p-4 overflow-x-auto"><div class="min-w-[700px]">
@@ -328,7 +270,6 @@
                     </div></div>
                 </div>
 
-                <!-- 4. Events Calendar -->
                 <div id="events" class="sub-tab-content hidden bg-dark-panel rounded-xl border border-dark-border overflow-hidden">
                     <div class="p-4 border-b border-dark-border bg-dark-bg/50 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="font-medium text-white flex items-center gap-2"><i data-lucide="calendar-range" class="w-5 h-5 text-emerald-500"></i> Company Event Calendar</h3>
@@ -354,14 +295,12 @@
 
             </div>
 
-            <!-- ===================== TAB 2: HIERARCHY ===================== -->
             <div id="tab-2" class="tab-content hidden flex flex-col h-full">
                  <div class="mb-4 flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                     <div>
                         <h2 class="text-xl font-semibold text-white">Organizational Hierarchy</h2>
-                        <p class="text-sm text-gray-400 mb-4">Structural flow charts across 7 distinct organizational branches.</p>
+                        <p class="text-sm text-gray-400 mb-4">Structural flow charts across 8 distinct organizational branches.</p>
                         
-                        <!-- 7 Slide Navigation Buttons -->
                         <div class="flex flex-wrap gap-2 bg-dark-panel p-2 border border-dark-border rounded-xl w-fit">
                             <button onclick="showOrgSlide(1)" id="btn-org-1" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg bg-brand-500 text-white shadow-lg shadow-brand-500/20 transition-colors">Aluva F&B</button>
                             <button onclick="showOrgSlide(2)" id="btn-org-2" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Aluva Kitchen</button>
@@ -370,17 +309,15 @@
                             <button onclick="showOrgSlide(5)" id="btn-org-5" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kakkanad</button>
                             <button onclick="showOrgSlide(6)" id="btn-org-6" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery F&B</button>
                             <button onclick="showOrgSlide(7)" id="btn-org-7" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Kalamassery Kitchen</button>
+                            <button onclick="showOrgSlide(8)" id="btn-org-8" class="org-nav-btn px-4 py-2 text-sm font-medium rounded-lg hover:bg-dark-border text-gray-400 hover:text-white transition-colors">Scroll</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Presentation Area -->
                 <div class="org-presentation relative flex-1 min-h-[600px] bg-dark-bg/80 rounded-xl border border-dark-border overflow-hidden flex justify-center items-center">
                     
-                    <!-- Watermark -->
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-5 pointer-events-none z-0 mix-blend-screen bg-center bg-no-repeat bg-contain" style="background-image: url('IMG/Logo2.png');"></div>
 
-                    <!-- SLIDE 1: Aluva F&B -->
                     <div id="slide1" class="org-slide active">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -429,7 +366,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 2: Aluva Kitchen -->
                     <div id="slide2" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -488,7 +424,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 3: Edachira F&B -->
                     <div id="slide3" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -523,7 +458,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 4: Edachira Kitchen -->
                     <div id="slide4" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -551,7 +485,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 5: Kakkanad -->
                     <div id="slide5" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -582,7 +515,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 6: Kalamassery F&B -->
                     <div id="slide6" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -626,7 +558,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 7: Kalamassery Kitchen -->
                     <div id="slide7" class="org-slide">
                         <div class="org-slide-content">
                             <svg class="org-connectors"></svg>
@@ -677,10 +608,42 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="slide8" class="org-slide">
+                        <div class="org-slide-content">
+                            <svg class="org-connectors"></svg>
+                            
+                            <div class="org-col">
+                                <div class="org-node root" id="s8-root"><div class="org-node-title">Scroll Hierarchy</div></div>
+                                <div class="org-node" id="s8-rm"><div class="org-node-title">RM</div><span class="org-staff-name" data-key="s8-rm"></span></div>
+                                <div class="org-node" id="s8-cash"><div class="org-node-title">Cashier In charge</div><span class="org-staff-name" data-key="s8-cash"></span></div>
+                                
+                                <div class="org-black-square" id="s8-bs1"></div>
+                                
+                                <div class="org-row" style="align-items: flex-start; gap: 40px;">
+                                    <div class="org-col">
+                                        <div class="org-node" id="s8-al"><div class="org-node-title">Alfaham Master</div><span class="org-staff-name" data-key="s8-al"></span></div>
+                                        <div class="org-black-square" id="s8-bs2"></div>
+                                        <div class="org-row">
+                                            <div class="org-node" id="s8-rice"><div class="org-node-title">Rice & Starters</div><span class="org-staff-name" data-key="s8-rice"></span></div>
+                                            <div class="org-node" id="s8-pan"><div class="org-node-title">Pantry</div><span class="org-staff-name" data-key="s8-pan"></span></div>
+                                            <div class="org-node" id="s8-sal"><div class="org-node-title">Salad</div><span class="org-staff-name" data-key="s8-sal"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="org-col">
+                                        <div class="org-node" id="s8-sw"><div class="org-node-title">Shawaya master</div><span class="org-staff-name" data-key="s8-sw"></span></div>
+                                    </div>
+                                    <div class="org-col">
+                                        <div class="org-node" id="s8-del"><div class="org-node-title">Delivery boy</div><span class="org-staff-name" data-key="s8-del"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- ===================== TAB 3: MANPOWER & COSTS ===================== -->
             <div id="tab-3" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-end">
                     <div>
@@ -689,64 +652,54 @@
                     </div>
                 </div>
 
-                <!-- Glassmorphism Metric Bar -->
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <!-- Starting Count -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="users" class="w-12 h-12"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">Starting Count</p>
-                        <h3 class="text-3xl font-bold text-white">140</h3>
+                        <h3 class="text-3xl font-bold text-white">139</h3>
                     </div>
 
-                    <!-- New Joiners -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-plus" class="w-12 h-12 text-green-400"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">New Joiners</p>
                         <div class="flex items-end gap-2">
-                            <h3 class="text-3xl font-bold text-white">84</h3>
+                            <h3 class="text-3xl font-bold text-white">78</h3>
                             <span class="text-green-400 text-xs font-medium mb-1 flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Added</span>
                         </div>
                     </div>
 
-                    <!-- Resigned -->
                     <div class="bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="user-minus" class="w-12 h-12 text-red-500"></i></div>
                         <p class="text-red-200 text-sm font-medium mb-1">Resigned</p>
-                        <h3 class="text-3xl font-bold text-red-400">84</h3>
+                        <h3 class="text-3xl font-bold text-red-400">66</h3>
                     </div>
 
-                    <!-- Closing Count -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="calculator" class="w-12 h-12 text-brand-400"></i></div>
                         <p class="text-gray-300 text-sm font-medium mb-1">Closing Count</p>
-                        <h3 class="text-3xl font-bold text-white">140</h3>
+                        <h3 class="text-3xl font-bold text-white">151</h3>
                     </div>
                 </div>
 
-                <!-- Attrition Highlight & Visualization Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     
-                    <!-- Attrition Rate Highlight -->
                     <div class="bg-gradient-to-br from-red-900/60 to-orange-900/40 backdrop-blur-lg border border-red-500/40 rounded-xl p-8 flex flex-col justify-center relative overflow-hidden shadow-2xl">
-                        <!-- Background glow effect -->
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-500/20 blur-3xl rounded-full"></div>
                         
                         <h3 class="text-red-200 font-medium text-lg mb-2">Attrition Rate</h3>
                         
                         <div class="flex items-baseline gap-4 mb-2">
                             <h1 class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
-                                60.00%
+                                45.52%
                             </h1>
                         </div>
                         
-                        <!-- Warning Sub-text -->
                         <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/20 border border-red-500/30 rounded-lg w-fit mb-6">
                             <i data-lucide="alert-triangle" class="w-4 h-4 text-red-400"></i>
                             <span class="text-red-200 text-sm font-semibold tracking-wide uppercase">Highest till date</span>
                         </div>
                     </div>
 
-                    <!-- Exit Breakdown Chart -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8 flex flex-col shadow-xl">
                         <h3 class="text-white font-medium text-lg mb-6 flex items-center gap-2">
                             <i data-lucide="bar-chart-horizontal" class="w-5 h-5 text-gray-400"></i>
@@ -754,59 +707,54 @@
                         </h3>
                         
                         <div class="flex-1 flex flex-col justify-center gap-6">
-                            <!-- Resigned -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Resigned</span>
-                                    <span class="text-white font-bold">38 <span class="text-gray-500 font-normal text-xs">(45%)</span></span>
+                                    <span class="text-white font-bold">24 <span class="text-gray-500 font-normal text-xs">(36.4%)</span></span>
                                 </div>
                                 <div class="h-4 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                    <div class="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" style="width: 45%"></div>
+                                    <div class="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" style="width: 36.4%"></div>
                                 </div>
                             </div>
 
-                            <!-- Absconding -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Absconding</span>
-                                    <span class="text-white font-bold">46 <span class="text-gray-500 font-normal text-xs">(55%)</span></span>
+                                    <span class="text-white font-bold">39 <span class="text-gray-500 font-normal text-xs">(59.1%)</span></span>
                                 </div>
                                 <div class="h-4 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                    <div class="h-full bg-gradient-to-r from-red-600 to-red-400 rounded-full" style="width: 55%"></div>
+                                    <div class="h-full bg-gradient-to-r from-red-600 to-red-400 rounded-full" style="width: 59.1%"></div>
                                 </div>
                             </div>
 
-                            <!-- Termination -->
                             <div class="w-full">
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-gray-300 font-medium">Termination</span>
-                                    <span class="text-white font-bold">0 <span class="text-gray-500 font-normal text-xs">(0%)</span></span>
+                                    <span class="text-white font-bold">3 <span class="text-gray-500 font-normal text-xs">(4.5%)</span></span>
                                 </div>
                                 <div class="h-4 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                    <div class="h-full bg-gradient-to-r from-red-800 to-red-700 rounded-full" style="width: 0%"></div>
+                                    <div class="h-full bg-gradient-to-r from-red-800 to-red-700 rounded-full" style="width: 4.5%"></div>
                                 </div>
                             </div>
                             
                             <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center">
                                 <span class="text-gray-400 text-sm">Total Attrition Volume</span>
-                                <span class="text-2xl font-bold text-white">84</span>
+                                <span class="text-2xl font-bold text-white">66</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Historical Attrition Trend Chart -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6 shadow-xl w-full">
                     <h3 class="text-white font-medium text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="line-chart" class="w-5 h-5 text-brand-400"></i>
-                        Historical Attrition Trend (Jun '25 - Apr '26)
+                        Historical Attrition Trend (Jul '25 - May '26)
                     </h3>
                     <div class="h-72 w-full relative">
                         <canvas id="attritionChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Labour Cost Data -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8 flex flex-col shadow-xl w-full">
                     <h3 class="text-white font-medium text-lg mb-6 flex items-center gap-2">
                         <i data-lucide="wallet" class="w-5 h-5 text-brand-400"></i>
@@ -814,54 +762,59 @@
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Edachira -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Edachira</span>
-                                <span class="text-white font-bold">23%</span>
+                                <span class="text-white font-bold">20%</span>
                             </div>
                             <div class="h-3 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                <div class="h-full bg-red-500 rounded-full" style="width: 23%"></div>
+                                <div class="h-full bg-red-500 rounded-full" style="width: 20%"></div>
                             </div>
                         </div>
 
-                        <!-- Aluva -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Aluva</span>
-                                <span class="text-white font-bold">17%</span>
+                                <span class="text-white font-bold">14%</span>
                             </div>
                             <div class="h-3 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                <div class="h-full bg-orange-500 rounded-full" style="width: 17%"></div>
+                                <div class="h-full bg-orange-500 rounded-full" style="width: 14%"></div>
                             </div>
                         </div>
 
-                        <!-- Kalamassery -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Kalamassery</span>
-                                <span class="text-white font-bold">16%</span>
+                                <span class="text-white font-bold">14%</span>
                             </div>
                             <div class="h-3 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                <div class="h-full bg-brand-400 rounded-full" style="width: 16%"></div>
+                                <div class="h-full bg-brand-400 rounded-full" style="width: 14%"></div>
                             </div>
                         </div>
 
-                        <!-- Kakkanad -->
                         <div class="w-full">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="text-gray-300 font-medium">Kakkanad</span>
-                                <span class="text-white font-bold">13%</span>
+                                <span class="text-white font-bold">10%</span>
                             </div>
                             <div class="h-3 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
-                                <div class="h-full bg-green-500 rounded-full" style="width: 13%"></div>
+                                <div class="h-full bg-green-500 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+
+                        <div class="w-full">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-300 font-medium">Scroll</span>
+                                <span class="text-white font-bold">32%</span>
+                            </div>
+                            <div class="h-3 w-full bg-dark-bg rounded-full overflow-hidden border border-white/5">
+                                <div class="h-full bg-purple-500 rounded-full" style="width: 32%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===================== TAB 4: RECRUITMENT ===================== -->
             <div id="tab-4" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -870,16 +823,14 @@
                     </div>
                 </div>
 
-                <!-- Side-by-Side Tables -->
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
                     
-                    <!-- Last Month Open Positions -->
                     <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col">
                         <div class="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
                             <h3 class="text-lg font-medium text-white flex items-center gap-2">
                                 <i data-lucide="history" class="w-5 h-5 text-gray-400"></i> Last Month Status
                             </h3>
-                            <span class="text-xs text-gray-400 bg-dark-bg px-2.5 py-1 rounded border border-white/10">April 2026</span>
+                            <span class="text-xs text-gray-400 bg-dark-bg px-2.5 py-1 rounded border border-white/10">May-26</span>
                         </div>
                         <div class="flex-1 overflow-x-auto">
                             <table class="w-full text-left text-sm text-gray-300 whitespace-nowrap">
@@ -891,28 +842,30 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-white/5">
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">4 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">13 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">7 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">9 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">5 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">4 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">6 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Re-open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Captain</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">0 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Waiter</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">12 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">17 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">8 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">2 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">3 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">7 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Head Chef</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">1 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RGM</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">1 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Closed</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">F&B manager</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">0 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">GM</td><td class="px-4 py-3 text-center text-gray-300 font-semibold">0 <span class="text-[10px] text-gray-500 ml-1">IN & OUT</span></td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- Current Month Open Positions -->
                     <div class="bg-white/5 backdrop-blur-lg border border-brand-500/30 rounded-xl p-6 shadow-2xl relative flex flex-col">
-                        <!-- Glow effect behind current month -->
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-500/10 blur-3xl rounded-full pointer-events-none"></div>
                         
                         <div class="flex items-center justify-between mb-4 pb-4 border-b border-white/10 relative z-10">
                             <h3 class="text-lg font-medium text-white flex items-center gap-2">
                                 <i data-lucide="crosshair" class="w-5 h-5 text-brand-400"></i> Current Month Status
                             </h3>
-                            <span class="text-xs text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/30 font-medium tracking-wide uppercase shadow-[0_0_10px_rgba(249,115,22,0.2)]">Active (May)</span>
+                            <span class="text-xs text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/30 font-medium tracking-wide uppercase shadow-[0_0_10px_rgba(249,115,22,0.2)]">Active (June)</span>
                         </div>
                         <div class="flex-1 overflow-x-auto relative z-10">
                             <table class="w-full text-left text-sm text-gray-300 whitespace-nowrap">
@@ -928,9 +881,8 @@
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Cleaning</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Washing</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Kitchen Helper</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawaya Master</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Shawarma/Shawaya Master</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Alfaham Master</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RGM</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">F&B manager</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                     <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">GM</td><td class="px-4 py-3 text-right"><span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2.5 py-1 rounded-full text-xs font-semibold">Open</span></td></tr>
                                 </tbody>
@@ -939,7 +891,6 @@
                     </div>
                 </div>
 
-                <!-- Recruitment Expenditure -->
                 <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl w-full mt-6">
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
                         <div class="flex items-center gap-3">
@@ -953,7 +904,7 @@
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Total Cost</p>
-                            <h2 class="text-3xl font-bold text-emerald-400">₹14,571</h2>
+                            <h2 class="text-3xl font-bold text-emerald-400">₹4,000</h2>
                         </div>
                     </div>
 
@@ -968,35 +919,15 @@
                             </thead>
                             <tbody class="divide-y divide-white/5">
                                 <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Job post for OLX</td>
-                                    <td class="px-4 py-3 text-gray-400">Shawarma helper, Service staff, Washing, cleaning staff</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">2,499</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Naukri</td>
-                                    <td class="px-4 py-3 text-gray-400">-</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">6,372</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Agent</td>
-                                    <td class="px-4 py-3 text-gray-400">-</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">1,500</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-white">Team Source</td>
-                                    <td class="px-4 py-3 text-gray-400">-</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">1,200</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
                                     <td class="px-4 py-3 font-medium text-white">Referral</td>
                                     <td class="px-4 py-3 text-gray-400">-</td>
-                                    <td class="px-4 py-3 text-right font-semibold text-white">3,000</td>
+                                    <td class="px-4 py-3 text-right font-semibold text-white">4,000</td>
                                 </tr>
                             </tbody>
                             <tfoot class="bg-black/40 font-bold border-t border-white/10">
                                 <tr>
                                     <td colspan="2" class="px-4 py-4 text-right text-gray-300 uppercase tracking-wider text-xs">Total Expenditure</td>
-                                    <td class="px-4 py-4 text-right text-emerald-400 text-base">₹14,571</td>
+                                    <td class="px-4 py-4 text-right text-emerald-400 text-base">₹4,000</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -1005,7 +936,6 @@
 
             </div>
 
-            <!-- ===================== TAB 5: COMPLIANCE ===================== -->
             <div id="tab-5" class="tab-content hidden">
                  <div class="mb-6">
                     <h2 class="text-xl font-semibold text-white">Compliance</h2>
@@ -1013,7 +943,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Fine Report -->
                     <div class="lg:col-span-2 bg-white/5 backdrop-blur-lg border border-red-500/30 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                             <div class="p-2 bg-red-500/20 rounded-lg border border-red-500/30">
@@ -1035,22 +964,31 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-white/5">
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">PM</td><td class="px-4 py-3 font-bold text-red-400">3750</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">HR</td><td class="px-4 py-3 font-bold text-red-400">1000</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">BDM</td><td class="px-4 py-3 font-bold text-red-400">3100</td><td class="px-4 py-3 text-gray-400">Tasks & Productivity</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Jithesh</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Jackson</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Nithin</td><td class="px-4 py-3 font-bold text-red-400">50</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">Vishnu</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
-                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">John</td><td class="px-4 py-3 font-bold text-red-400">125</td><td class="px-4 py-3 text-gray-400">Dap/Dar | In/Out</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">AKHIL P J</td><td class="px-4 py-3 font-bold text-red-400">550</td><td class="px-4 py-3 text-gray-400">Attendance mistake</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">JINTO MATHEW</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Uninformaed Leave</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RAPHEAL JACKSON</td><td class="px-4 py-3 font-bold text-red-400">2000</td><td class="px-4 py-3 text-gray-400">Alcahole</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">MUHAMMAD FAYIS</td><td class="px-4 py-3 font-bold text-red-400">175</td><td class="px-4 py-3 text-gray-400">Salary updation</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">AKHIL SAJEEV</td><td class="px-4 py-3 font-bold text-red-400">175</td><td class="px-4 py-3 text-gray-400">Salary updation</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">JINTO MATHEW</td><td class="px-4 py-3 font-bold text-red-400">200</td><td class="px-4 py-3 text-gray-400">Uninformaed Leave</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">VIPIN K</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Late coming</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">JITHIN A NAIR</td><td class="px-4 py-3 font-bold text-red-400">150</td><td class="px-4 py-3 text-gray-400">Late coming</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">SHAMEER K.K</td><td class="px-4 py-3 font-bold text-red-400">600</td><td class="px-4 py-3 text-gray-400">Attendance mistake</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">HASHIM V</td><td class="px-4 py-3 font-bold text-red-400">100</td><td class="px-4 py-3 text-gray-400">Late coming</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">JITHIN A NAIR</td><td class="px-4 py-3 font-bold text-red-400">150</td><td class="px-4 py-3 text-gray-400">Late coming</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">VIPIN DAS</td><td class="px-4 py-3 font-bold text-red-400">35</td><td class="px-4 py-3 text-gray-400">BILL MISTAKE</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">VINCY S</td><td class="px-4 py-3 font-bold text-red-400">1000</td><td class="px-4 py-3 text-gray-400">Unplanned Leave on Sunday</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RIYAS</td><td class="px-4 py-3 font-bold text-red-400">500</td><td class="px-4 py-3 text-gray-400">Shawaya Chicken not stored properly</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">RAPHEAL JACKSON</td><td class="px-4 py-3 font-bold text-red-400">363</td><td class="px-4 py-3 text-gray-400">recharge</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">SREERAJ</td><td class="px-4 py-3 font-bold text-red-400">256</td><td class="px-4 py-3 text-gray-400">Cash Short</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">PM</td><td class="px-4 py-3 font-bold text-red-400">3050</td><td class="px-4 py-3 text-gray-400">Task Fine</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">HR</td><td class="px-4 py-3 font-bold text-red-400">1100</td><td class="px-4 py-3 text-gray-400">Task Fine</td></tr>
+                                    <tr class="hover:bg-white/5 transition-colors"><td class="px-4 py-3 font-medium text-white">BDM</td><td class="px-4 py-3 font-bold text-red-400">3050</td><td class="px-4 py-3 text-gray-400">Task Fine</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- Right Column Wrapper -->
                     <div class="flex flex-col gap-6">
-                        <!-- Hike Summary -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-emerald-500/20 rounded-lg border border-emerald-500/30">
@@ -1066,22 +1004,21 @@
                                 <div class="bg-black/20 p-4 rounded-lg border border-white/5 flex justify-between items-center">
                                     <div>
                                         <h4 class="text-white font-medium mb-1 text-sm">Monthly Salary Hike</h4>
-                                        <p class="text-xs text-gray-400">17 employees total</p>
+                                        <p class="text-xs text-gray-400">4 employees total</p>
                                     </div>
-                                    <span class="text-lg font-bold text-emerald-400">₹81,000</span>
+                                    <span class="text-lg font-bold text-emerald-400">₹38,200</span>
                                 </div>
                                 
                                 <div class="bg-black/20 p-4 rounded-lg border border-white/5 flex justify-between items-center">
                                     <div>
                                         <h4 class="text-white font-medium mb-1 text-sm">Wage Hike</h4>
-                                        <p class="text-xs text-gray-400">11 employees total</p>
+                                        <p class="text-xs text-gray-400">15 employees total</p>
                                     </div>
-                                    <span class="text-lg font-bold text-emerald-400">₹1,500</span>
+                                    <span class="text-lg font-bold text-emerald-400">₹1,100</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Policy Updates -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-blue-500/20 rounded-lg border border-blue-500/30">
@@ -1094,20 +1031,6 @@
                             </div>
                             
                             <div class="space-y-4">
-                                <!-- Leave Policy -->
-                                <div class="bg-black/20 p-4 rounded-lg border border-white/5">
-                                    <div class="flex items-start gap-3">
-                                        <i data-lucide="calendar-clock" class="w-5 h-5 text-brand-400 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="text-white font-medium mb-1">Leave Policy Revised</h4>
-                                            <p class="text-xs text-gray-400 leading-relaxed">
-                                                Updated guidelines for leave tracking and approvals.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Reference Policy -->
                                 <div class="bg-black/20 p-4 rounded-lg border border-white/5">
                                     <div class="flex items-start gap-3">
                                         <i data-lucide="users" class="w-5 h-5 text-purple-400 mt-0.5"></i>
@@ -1119,23 +1042,9 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Onboarding SOP -->
-                                <div class="bg-black/20 p-4 rounded-lg border border-white/5">
-                                    <div class="flex items-start gap-3">
-                                        <i data-lucide="book-open-check" class="w-5 h-5 text-green-400 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="text-white font-medium mb-1">New Staff Onboarding SOP added</h4>
-                                            <p class="text-xs text-gray-400 leading-relaxed">
-                                                Standard Operating Procedure added for smooth inductions.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Salary Hikes -->
                         <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl flex flex-col h-fit">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
                                 <div class="p-2 bg-green-500/20 rounded-lg border border-green-500/30">
@@ -1148,14 +1057,12 @@
                             </div>
                             
                             <div id="salary-hikes-container" class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar-hide">
-                                <!-- Dynamic content will be injected here -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===================== TAB 6: OUTLET REPORTS ===================== -->
             <div id="tab-6" class="tab-content hidden">
                  <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -1176,7 +1083,6 @@
                     </div>
                     
                     <div class="space-y-8">
-                        <!-- Critical Issue -->
                         <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-6 flex gap-5 items-start relative overflow-hidden">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-2xl rounded-full pointer-events-none"></div>
                             
@@ -1191,32 +1097,6 @@
                             </div>
                         </div>
 
-                        <!-- Visit Media Placeholders -->
-                        <div class="pt-4 border-t border-dark-border">
-                            <h4 class="text-white font-medium mb-4 flex items-center gap-2">
-                                <i data-lucide="camera" class="w-5 h-5 text-gray-400"></i>
-                                Visit Media
-                            </h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Placeholder 1 -->
-                                <div class="border border-dark-border rounded-xl h-56 flex items-center justify-center overflow-hidden bg-dark-bg/30 relative transition-colors cursor-default">
-                                    <img src="IMG/KKD.jpeg" alt="Outlet Visit Media KKD" onerror="this.src='https://placehold.co/600x400/181b21/a1a1aa?text=KKD'" class="absolute inset-0 w-full h-full object-cover z-0">
-                                </div>
-                                <!-- Placeholder 2 -->
-                                <div class="border border-dark-border rounded-xl h-56 flex items-center justify-center overflow-hidden bg-dark-bg/30 relative transition-colors cursor-default">
-                                    <img src="IMG/EDA.jpeg" alt="Outlet Visit Media EDA" onerror="this.src='https://placehold.co/600x400/181b21/a1a1aa?text=EDA'" class="absolute inset-0 w-full h-full object-cover z-0">
-                                </div>
-                                <!-- Placeholder 3 -->
-                                <div class="border border-dark-border rounded-xl h-56 flex items-center justify-center overflow-hidden bg-dark-bg/30 relative transition-colors cursor-default">
-                                    <img src="IMG/KLY.jpeg" alt="Outlet Visit Media KLY" onerror="this.src='https://placehold.co/600x400/181b21/a1a1aa?text=KLY'" class="absolute inset-0 w-full h-full object-cover z-0">
-                                </div>
-                                <!-- Placeholder 4 -->
-                                <div class="border border-dark-border rounded-xl h-56 flex items-center justify-center overflow-hidden bg-dark-bg/30 relative transition-colors cursor-default">
-                                    <img src="IMG/ALV.jpeg" alt="Outlet Visit Media ALV" onerror="this.src='https://placehold.co/600x400/181b21/a1a1aa?text=ALV'" class="absolute inset-0 w-full h-full object-cover z-0">
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -1224,7 +1104,6 @@
         </div>
     </main>
 
-    <!-- Tab Switching Logic & Icon Initialization -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
@@ -1237,84 +1116,84 @@
             "s1-rm": "Shameer",
             "s1-fbm": "Jithesh",
             "s1-arm": "Sachu",
-            "s1-gre": "Princy R",
+            "s1-gre": "Princy",
             "s1-cash1": "Sudev",
-            "s1-cash2": "Swalih",
-            "s1-cap1": "H Akiu",
+            "s1-cash2": "Sharath",
+            "s1-cap1": "Swalih",
             "s1-cap2": "Karthika",
-            "s1-cap3": "Jithin",
-            "s1-cap4": "Arjun",
-            "s1-cap5": "Sachu Rajeev",
-            "s1-cap6": "Vincy",
-            "s1-w1": "CHINGNYU POANGMAI",
-            "s1-w2": "EYEM PONGLHON",
-            "s1-w3": "MARY BMONYU A",
-            "s1-w4": "ENYEM A",
-            "s1-w5": "NYANGYA KONYAK",
-            "s1-run": "Ajay",
-            "s1-lift": "Roopak",
-            "s1-pan": "--------",
-            "s1-u1": "Eyaj Uddin",
-            "s1-u2": "Musaddik Alam",
-            "s1-u3": "Umar Faruk",
-            "s1-u4": "Roni Samanta",
-            "s1-u5": "Musaraf Husen",
+            "s1-cap3": "H Akiu",
+            "s1-cap4": "Vincy",
+            "s1-cap5": "--------",
+            "s1-cap6": "--------",
+            "s1-w1": "Arjun",
+            "s1-w2": "Sachu Rajeev",
+            "s1-w3": "Shahin",
+            "s1-w4": "Jithin",
+            "s1-w5": "Nihal",
+            "s1-run": "Chingnyu<br>Mary<br>Enyem<br>Nyangya<br>Eyem",
+            "s1-lift": "Rupak Shaji",
+            "s1-pan": "Bimal",
+            "s1-u1": "Mujammil",
+            "s1-u2": "Nabin",
+            "s1-u3": "Eyajuddin",
+            "s1-u4": "Roni",
+            "s1-u5": "--------",
 
             // SLIDE 2: Aluva Kitchen
             "s2-exec": "--------",
-            "s2-sous": "--------",
-            "s2-ch-hd": "Rajesh Saha",
+            "s2-sous": "Saji",
+            "s2-ch-hd": "Rajesh",
             "s2-ch-ms": "Chona Rabha",
-            "s2-ch-h1": "Binendra Rabha",
+            "s2-ch-h1": "Binendra",
             "s2-ch-h2": "--------",
             "s2-ch-h3": "--------",
             "s2-al-hd": "Sabir",
-            "s2-al-ms": "Asif",
-            "s2-al-h1": "Bimal Das",
-            "s2-ju-hd": "AZARUDDIN",
+            "s2-al-ms": "Suraj",
+            "s2-al-h1": "Aslam",
+            "s2-ju-hd": "Azaruddin",
             "s2-ju-h1": "Abu Sahib",
-            "s2-sw-hd": "Ajit",
+            "s2-sw-hd": "Ajith",
             "s2-sw-h1": "Ranjan Das",
-            "s2-pa-hd": "Bijay Das",
-            "s2-pa-h1": "Sourav",
-            "s2-po-hd": "--------",
+            "s2-pa-hd": "Sourav",
+            "s2-pa-h1": "Bimal",
+            "s2-po-hd": "Indrajith",
             "s2-sy-hd": "Dhoni",
-            "s2-w1": "SUNIL DEV",
-            "s2-w2": "HARIBASI",
-            "s2-w3": "Kamarao",
-            "s2-w4": "--------",
-            "s2-cl1": "Rakibul",
-            "s2-cl2": "Bhoveswar Tosha",
+            "s2-w1": "Sunil Dev",
+            "s2-w2": "Kamarao",
+            "s2-w3": "Ashif",
+            "s2-w4": "Ajay Kumar",
+            "s2-cl1": "Athulur Rahman",
+            "s2-cl2": "--------",
 
             // SLIDE 3: Edachira F&B
-            "s3-rm": "John",
+            "s3-rm": "Vipin",
             "s3-fbm": "Nithin MA",
-            "s3-cap1": "Vipin DAS",
-            "s3-cap2": "Nipin",
-            "s3-cash": "--------",
-            "s3-cashcap": "Nikil",
-            "s3-w1": "Njana Prakash",
-            "s3-w2": "Abhith",
-            "s3-del": "Joel",
-            "s3-cl1": "Panyel",
-            "s3-cl2": "Rinku",
+            "s3-cap1": "Vipin Das<br>Nibin",
+            "s3-cap2": "Abhith<br>Renjith",
+            "s3-cash": "Muhammed Ali",
+            "s3-cashcap": "Nikhil D",
+            "s3-w1": "Mubeen",
+            "s3-w2": "SALMANUL FARIS P",
+            "s3-del": "--------",
+            "s3-cl1": "Rinku",
+            "s3-cl2": "Ashraful Islam",
 
             // SLIDE 4: Edachira Kitchen
-            "s4-rm": "John",
-            "s4-hc": "Mansoor",
-            "s4-swms": "--------",
-            "s4-jums": "Karim",
+            "s4-rm": "--------",
+            "s4-hc": "Sayed Ali",
+            "s4-swms": "Arman",
+            "s4-jums": "Arman",
             "s4-rice": "Juraij",
-            "s4-pan": "Samim",
-            "s4-al2": "Arman",
-            "s4-w1": "Anzar",
+            "s4-pan": "Abdul Hannan",
+            "s4-al2": "--------",
+            "s4-w1": "Panyel",
             "s4-w2": "--------",
 
             // SLIDE 5: Kakkanad
             "s5-rm": "Jackson",
             "s5-hc": "Ashatosh Giri",
             "s5-swms": "Gaffar",
-            "s5-pan": "Ram Bahadur",
+            "s5-pan": "Bijoy Das",
             "s5-rice": "Anok",
             "s5-al2": "--------",
             "s5-util": "Dipak",
@@ -1324,39 +1203,49 @@
             // SLIDE 6: Kalamassery F&B
             "s6-rm": "Vishnu",
             "s6-fbm": "--------",
-            "s6-srcap": "Sojin",
+            "s6-srcap": "Sreeraj",
             "s6-del": "Govind",
             "s6-gre": "--------",
-            "s6-cash": "Shan",
-            "s6-cashcap": "Ranish VA",
-            "s6-cap": "Sreeraj",
-            "s6-w1": "Salman Sajeer",
-            "s6-w2": "Jinto Mathew",
-            "s6-w3": "Ganeshan",
-            "s6-wpt1": "--------",
-            "s6-wpt2": "--------",
-            "s6-dispt": "--------",
-            "s6-callpt": "--------",
-            "s6-u1": "Salku",
-            "s6-u2": "--------",
-            "s6-u3": "--------",
+            "s6-cash": "Shan CB",
+            "s6-cashcap": "Ranish",
+            "s6-cap": "--------",
+            "s6-w1": "Salman",
+            "s6-w2": "Basith",
+            "s6-w3": "Nasif",
+            "s6-wpt1": "Jinto",
+            "s6-wpt2": "Ganesh",
+            "s6-dispt": "Vijesh",
+            "s6-callpt": "Vipin",
+            "s6-u1": "Salku Mani",
+            "s6-u2": "Aksar uddin",
+            "s6-u3": "Aman Kumar<br>Ravi Kumar",
 
             // SLIDE 7: Kalamassery Kitchen
             "s7-rm": "Vishnu",
-            "s7-hc": "--------",
-            "s7-al-hd": "Aslam",
-            "s7-al-h1": "Sahil Ansari",
-            "s7-ju-hd": "Abrahim",
-            "s7-sw-hd": "Amjad Mohiddin",
-            "s7-sw-h1": "Azam",
-            "s7-sy-hd": "Samir Ansari",
+            "s7-hc": "Shalom",
+            "s7-al-hd": "Samir Ansari",
+            "s7-al-h1": "Enabul<br>Tasir Ansari",
+            "s7-ju-hd": "Abrahim Saith",
+            "s7-sw-hd": "Muqqadar",
+            "s7-sw-h1": "Nekibor",
+            "s7-sy-hd": "Bablu",
             "s7-pa-hd": "Shah Alom",
-            "s7-r1": "Athosh",
-            "s7-r2": "Sirach R",
+            "s7-r1": "Sirachondro",
+            "s7-r2": "--------",
             "s7-par": "Bikas",
-            "s7-rice": "Abdul Hannan",
-            "s7-w1": "MD Munajir",
-            "s7-w2": "MR Alam"
+            "s7-rice": "Injamul",
+            "s7-w1": "Munajir",
+            "s7-w2": "Akin Ali",
+
+            // SLIDE 8: Scroll
+            "s8-rm": "--------",
+            "s8-cash": "--------",
+            "s8-al": "--------",
+            "s8-sw": "--------",
+            "s8-del": "--------",
+            "s8-rice": "--------",
+            "s8-pan": "--------",
+            "s8-sal": "--------"
         };
 
         function loadStaffNames() {
@@ -1369,7 +1258,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', loadStaffNames);
-
 
         // ============================================
         // CORE TABS LOGIC
@@ -1436,9 +1324,9 @@
             if (!grid) return;
             
             let html = '';
-            const daysInMonth = 31;
-            const startingDayOfWeek = 5; // Friday
-            const prevMonthDays = 30; // April
+            const daysInMonth = 30; // June has 30 days
+            const startingDayOfWeek = 1; // Monday (June 1st, 2026 is a Monday)
+            const prevMonthDays = 31; // May has 31 days
             
             // Previous month cells
             for (let i = 0; i < startingDayOfWeek; i++) {
@@ -1476,7 +1364,7 @@
 
         // --- Organizational Hierarchy Logic ---
         let currentOrgSlide = 1;
-        const totalOrgSlides = 7;
+        const totalOrgSlides = 8;
         const orgConnectionDefs = [];
 
         function initOrgConnections() {
@@ -1591,6 +1479,15 @@
             connect('slide7', 's7-par', ['s7-bs2']);
             connect('slide7', 's7-rice', ['s7-bs2']);
             connect('slide7', 's7-bs2', ['s7-w1', 's7-w2']);
+
+            // Slide 8: Scroll
+            connect('slide8', 's8-root', ['s8-rm']);
+            connect('slide8', 's8-rm', ['s8-cash']);
+            connect('slide8', 's8-cash', ['s8-bs1']);
+            connect('slide8', 's8-bs1', ['s8-al', 's8-sw', 's8-del']);
+            connect('slide8', 's8-al', ['s8-bs2']);
+            connect('slide8', 's8-sw', ['s8-bs2']); // Connect Shawaya Master to junction
+            connect('slide8', 's8-bs2', ['s8-rice', 's8-pan', 's8-sal']);
         }
 
         function showOrgSlide(index) {
@@ -1696,12 +1593,12 @@
             // 1. Core Team Leaves Data & Rendering
             // ============================================
             const coreLeaveData = {
-                PM: [4, 5, 6],
-                FM: [2, 3, 6, 10, 17, 24, 31],
-                BDM: [10],
-                HR: [3, 10, 17, 24, 31, 4],
-                GM: [6, 10, 17, 24, 31],
-                Chef: [18]
+                BDM: [9, 10, 11, 12],
+                Chef: [8, 9, 20, 26],
+                GM: [7, 14, 21, 28],
+                HR: [4, 7, 13, 14, 15, 21, 28], 
+                FM: [7, 14, 21, 28],
+                PM: [2, 14, 21, 28]
             };
             const coreRoleStyles = {
                 PM: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
@@ -1736,18 +1633,20 @@
             // 2. Managers Leaves Data & Rendering
             // ============================================
             const managerLeaveData = {
-                John: [3, 10, 23, 6],
-                Shameer: [19, 20, 21, 6],
-                Gerald: [6, 7, 13, 14],
-                Nithin: [5, 17, 24, 6],
-                Jackson: [9, 19, 6]
+                John: [2, 3, 4],
+                Shameer: [2, 3],
+                Nithin: [7, 17, 21, 28],
+                Jackson: [9, 10, 11, 12, 16, 17, 18],
+                Vipin: [13, 14, 15],
+                Jithesh: [9, 10, 11]
             };
             const managerStyles = {
                 John: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
                 Shameer: 'bg-green-500/20 text-green-400 border-green-500/30',
-                Gerald: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
                 Nithin: 'bg-brand-500/20 text-brand-400 border-brand-500/30',
-                Jackson: 'bg-teal-500/20 text-teal-400 border-teal-500/30'
+                Jackson: 'bg-teal-500/20 text-teal-400 border-teal-500/30',
+                Vipin: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                Jithesh: 'bg-pink-500/20 text-pink-400 border-pink-500/30'
             };
             
             const managerLeaveMap = {};
@@ -1775,9 +1674,10 @@
             // ============================================
             const visitData = {
                 BDM: { 3: 'EDA', 10: 'KKD', 17: 'KLY', 24: 'ALV' },
-                HR: { 11: 'Edachira', 13: 'KKD', 18: 'KLY', 20: 'Aluva' },
-                FM: { 13: 'Alv, Kly', 21: 'Info, KKD' },
-                PM: { 3: 'All Outlets' }
+                HR: { 10: 'Aluva', 17: 'Kalamassery', 24: 'Edachira', 25: 'Kakkanad & Scroll' },
+                PM: { 6: 'All Outlets', 13: 'All Outlets', 20: 'All Outlets', 27: 'All Outlets' },
+                Chef: { 4: 'All Outlets' },
+                FM: { 15: 'Aluva, Kalamassery', 22: 'Seaport, Infopark', 24: 'Scroll' }
             };
             const visitStyles = {
                 BDM: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
@@ -1811,27 +1711,20 @@
             // 4. Events Data & Rendering
             // ============================================
             const eventData = {
-                2: [{ type: 'core', title: 'Core team Report Review meeting with GM' }],
-                5: [
-                    { type: 'core', title: 'Purchase + B.D.M Report Review meeting with GM' },
-                    { type: 'managers', title: 'Managers meeting' }
-                ],
-                7: [{ type: 'core', title: 'Core Team Trial Meeting' }],
-                8: [{ type: 'core', title: 'Core Team Meeting' }],
-                11: [{ type: 'training', title: 'O.D.C' }],
-                12: [{ type: 'training', title: 'O.D.C' }],
-                13: [{ type: 'managers', title: 'Managers meeting' }],
-                15: [{ type: 'core', title: 'Marketing Calendar' }],
-                16: [{ type: 'core', title: 'Core Team Meeting' }],
-                18: [{ type: 'training', title: 'Induction Training' }],
-                19: [{ type: 'training', title: 'Induction Training' }],
-                20: [{ type: 'managers', title: 'Managers Meeting' }],
-                21: [{ type: 'training', title: 'O.J.T' }],
-                23: [{ type: 'core', title: 'Core team Meeting' }],
-                25: [{ type: 'training', title: 'O.J.T' }],
-                26: [{ type: 'managers', title: 'Managers meeting for Bakrid planning' }],
-                27: [{ type: 'holiday', title: 'Bakrid' }],
-                30: [{ type: 'core', title: 'Core team meeting' }]
+                1: [{ type: 'core', title: 'Anniversary celebration' }],
+                5: [{ type: 'core', title: 'Scroll inauguration' }],
+                8: [{ type: 'core', title: 'Core team meeting' }],
+                9: [{ type: 'training', title: 'O.J.T kalamassery' }],
+                10: [{ type: 'managers', title: 'Managers meeting & Audit' }],
+                11: [{ type: 'training', title: 'O.J.T Edachira' }],
+                17: [{ type: 'managers', title: 'Managers meeting & Audit' }],
+                20: [{ type: 'core', title: 'Core team meeting & Accommodation visit' }],
+                22: [{ type: 'training', title: 'Induction training' }],
+                23: [{ type: 'training', title: 'Induction training' }],
+                24: [{ type: 'managers', title: 'Managers meeting & Audit' }],
+                27: [{ type: 'core', title: 'Core team meeting' }],
+                29: [{ type: 'training', title: 'O.D.C' }],
+                30: [{ type: 'training', title: 'O.D.C' }]
             };
             const eventStyles = {
                 core: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
@@ -1857,34 +1750,25 @@
             // 5. Salary Hikes Data & Rendering
             // ============================================
             const salaryHikesData = [
-                { name: "Rekha C K", old: 28000, new: 33000 },
-                { name: "Teena Thomas", old: 22000, new: 25000 },
-                { name: "Suresh", old: 50000, new: 60000 },
-                { name: "Logesh", old: 55000, new: 65000 },
-                { name: "John", old: 40000, new: 45000 },
-                { name: "ANANDHU", old: 20000, new: 22000 },
-                { name: "ANOOP BASKARAN", old: 27000, new: 30000 },
-                { name: "MD SWALIH", old: 18000, new: 20000 },
-                { name: "KARTHIKA", old: 18000, new: 20000 },
-                { name: "JOBIN PJ", old: 22000, new: 25000 },
-                { name: "SALNAS C N", old: 16000, new: 18000 },
-                { name: "GERALD .V VALAN", old: 47000, new: 50000 },
-                { name: "RAPHEAL JACKSON", old: 30000, new: 33000 },
-                { name: "NIBIN", old: 20000, new: 23000 },
-                { name: "AJITH", old: 17000, new: 19000 },
-                { name: "MUHAMMED FAIES", old: 20000, new: 23000 },
-                { name: "RAKESH", old: 65000, new: 85000 },
-                { name: "DHAN", old: 700, new: 800 },
-                { name: "ASIF", old: 650, new: 800 },
-                { name: "ASHATOSH GIRI", old: 1100, new: 1200 },
-                { name: "BISHAL", old: 1300, new: 1500 },
-                { name: "SUBOJ MURMU", old: 550, new: 800 },
-                { name: "MD GAFER", old: 900, new: 1100 },
-                { name: "SAHIL ANSARI", old: 600, new: 700 },
-                { name: "BIJAY DAS", old: 600, new: 700 },
-                { name: "SOURAV DAS", old: 700, new: 800 },
-                { name: "MANSOOR", old: 1200, new: 1300 },
-                { name: "AZAAM", old: 550, new: 650 }
+                { name: "MOFIJUL MONDAL", old: 550, new: 600, type: "Weekly" },
+                { name: "SHAMEER K.K", old: 45000, new: 50000, type: "Monthly" },
+                { name: "Sudev K", old: 18000, new: 20000, type: "Monthly" },
+                { name: "SUNIL DEV", old: 600, new: 650, type: "Weekly" },
+                { name: "HARIBASI DAS", old: 600, new: 650, type: "Weekly" },
+                { name: "BUDHALAL SOREN", old: 500, new: 600, type: "Weekly" },
+                { name: "SALKU MARDI", old: 550, new: 600, type: "Weekly" },
+                { name: "MISTAR ALAM", old: 600, new: 650, type: "Weekly" },
+                { name: "MD MUNAJIR", old: 600, new: 650, type: "Weekly" },
+                { name: "EYAJ UDDIN", old: 550, new: 600, type: "Weekly" },
+                { name: "Dipak Hembram", old: 550, new: 650, type: "Weekly" },
+                { name: "Nijamuddin Molla", old: 800, new: 27000, type: "Monthly" }, // Assuming change in type
+                { name: "WASEEM", old: 850, new: 950, type: "Weekly" },
+                { name: "RANJAN DAS", old: 500, new: 650, type: "Weekly" },
+                { name: "BIMAL DAS", old: 550, new: 650, type: "Weekly" },
+                { name: "ABU SAHIB", old: 550, new: 600, type: "Weekly" },
+                { name: "ADIL", old: 550, new: 600, type: "Weekly" },
+                { name: "RAPHEAL JACKSON", old: 30000, new: 35000, type: "Monthly" },
+                { name: "M.D KAZISOHEL", old: 800, new: 900, type: "Weekly" }
             ];
 
             const hikesContainer = document.getElementById('salary-hikes-container');
@@ -1895,19 +1779,22 @@
                         ? '<i data-lucide="minus" class="w-3 h-3 text-gray-500"></i>'
                         : '<i data-lucide="arrow-right" class="w-3 h-3 text-green-400"></i>';
                     const newColor = isSame ? 'text-gray-400' : 'text-green-400';
+                    const currencySymbol = hike.type === "Weekly" ? "₹" : "₹";
                     
                     return `
                         <div class="bg-black/20 p-3 rounded-lg border border-white/5 flex justify-between items-center">
-                            <span class="text-white font-medium text-sm">${hike.name.toUpperCase()}</span>
+                            <div>
+                                <span class="text-white font-medium text-sm block">${hike.name.toUpperCase()}</span>
+                                <span class="text-[10px] text-gray-500 uppercase tracking-wider">${hike.type}</span>
+                            </div>
                             <div class="flex items-center gap-2 text-xs font-bold">
-                                <span class="text-gray-400">${hike.old}</span>
+                                <span class="text-gray-400">${currencySymbol}${hike.old}</span>
                                 ${iconHTML}
-                                <span class="${newColor}">${hike.new}</span>
+                                <span class="${newColor}">${currencySymbol}${hike.new}</span>
                             </div>
                         </div>
                     `;
                 }).join('');
-                // Re-initialize lucide icons for newly injected HTML
                 lucide.createIcons();
             }
 
@@ -1920,10 +1807,10 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["Jun '25", "Jul '25", "Aug '25", "Sep '25", "Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26", "Apr '26"],
+                    labels: ["Jul '25", "Aug '25", "Sep '25", "Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26", "Apr '26", "May '26"],
                     datasets: [{
                         label: 'Attrition Rate (%)',
-                        data: [17.10, 12.00, 11.20, 31.40, 20.80, 19.87, 20.46, 19.33, 13.77, 34.69, 60.00],
+                        data: [12.00, 11.20, 31.40, 20.80, 19.87, 20.46, 19.33, 13.77, 34.69, 60.00, 45.52],
                         backgroundColor: gradient,
                         borderColor: '#ea580c',
                         borderWidth: 1,
